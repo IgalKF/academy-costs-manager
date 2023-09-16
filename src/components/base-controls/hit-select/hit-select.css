@@ -1,0 +1,9 @@
+.select-input {
+    min-width: 170px;
+}
+
+.control-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
