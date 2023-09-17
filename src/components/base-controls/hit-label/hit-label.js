@@ -36,7 +36,7 @@ const HitLabel = ({ children, bold, fontType, controlLabel, labelId }) => {
 	if (controlLabel) {
 		// Add MUI needed properties.
 		labelElement = (
-			<FormControl className="control-label" size="small">
+			<FormControl fullWidth className="control-label" size="small">
 				<InputLabel id={labelId}>{controlLabel}</InputLabel>
 				{labelElement}
 			</FormControl>);

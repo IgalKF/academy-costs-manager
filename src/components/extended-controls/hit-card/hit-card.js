@@ -1,7 +1,10 @@
+import { Card } from "@mui/material";
 import React from "react";
 
-const HitCard = () => {
-    return <div className='hit-card'></div>
+const HitCard = ({ children }) => {
+    return <div className='hit-card'>
+        <Card>{children}</Card>
+    </div>
 };
 
 export { HitCard };

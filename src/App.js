@@ -8,7 +8,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { HitLabel } from './components/base-controls/hit-label/hit-label';
 import { HitTable } from './components/page-components/hit-table/hit-table';
-import { HitSelect } from './components/base-controls/hit-select/hit-select';
+import { HitTextInput } from './components/base-controls/hit-text-input/hit-text-input';
 
 /**
  * Main application component.
@@ -23,7 +23,7 @@ function App() {
           <HitIcon>filter</HitIcon>
           <HitDatepicker>dfgdfgdfg</HitDatepicker>
           <HitLabel fontType='title' bold={false}>dfsdsfds</HitLabel>
-          <HitSelect options={['dsfsdf']} label='Choose Category' />
+          <HitTextInput options={['dsfsdf']} label='Choose Category' />
           <HitTable />
         </ThemeProvider>
       </LocalizationProvider>

@@ -1,7 +1,7 @@
 import React from "react";
 
 const HitHeader = () => {
-    return <div className='hit-header'></div>
+    return <div className="hit-header"></div>
 };
 
 export { HitHeader };
