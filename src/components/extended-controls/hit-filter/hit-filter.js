@@ -8,8 +8,8 @@ const HitFilter = ({ filters }) => {
     }
 
     const filterControls = filters.map()
-    return <div className='hit-filter'>
-    </div>
+    return (<div className='hit-filter'>
+    </div>);
 };
 
 export { HitFilter };

@@ -1,7 +1,7 @@
 /**
  * Indexed database service containing declaration for Indexed DB operations.
  */
-const IndexedDatabaseService = () => {
+class IndexedDatabaseService {
   return;
 }
 
@@ -57,7 +57,7 @@ class CostTransactionsService {
   /**
  * Get all cost transactions from the database. 
  * @param {CostTransactionRequest} costTransaction 
- * @returns {boolean} Whether the transaction has been added successfully or not.
+ * @returns {CostTransactionResponse} All records of cost transactions.
  */
   getAllCosts = async (costTransaction) => {
 
@@ -66,16 +66,12 @@ class CostTransactionsService {
       const validateKey = this.dbConfiguration
         .transaction(['costTransactions'], 'readwrite')
         .objectStore('costTransactions')
-        .add({
-          category: costTransaction.category,
-          description: costTransaction.description,
-          sum: costTransaction.sum,
-        });
+        .getAll();
 
       // Resolve promise call with insertion success..
       validateKey.onsuccess = (event) => {
         console.debug('Database connection succeded.')
-        resolve(true);
+        resolve(event.currentTarget.result);
       };
 
       // Error handling assignment.
@@ -132,7 +128,7 @@ IndexedDatabaseService.prototype.openCostsDB = async (databaseName, databaseVers
 
 /**
  * Cost transaction request.
-*/
+ */
 class CostTransactionRequest {
   /**
    * The total cost of the given transaction.
@@ -196,4 +192,4 @@ class CostTransactionResponse {
   date;
 }
 
-export { CostTransactionRequest, CostTransactionResponse, idb };
+export { CostTransactionRequest, CostTransactionResponse, CostTransactionsService, idb };

@@ -9,7 +9,7 @@ import './hit-datepicker.css';
  */
 const HitDatepicker = ({ children }) => {
   return <div className='hit-datepicker'>
-    <div class="inline-align-container">
+    <div className="inline-align-container">
       <DatePicker label={children} />
     </div>
   </div>;
