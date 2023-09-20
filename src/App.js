@@ -33,32 +33,36 @@ import { HitFilter } from "./components/extended-controls/hit-filter/hit-filter"
 const App = () => {
   const [costTransactionRecords, setCostTransactionRecords] = useState([]);
   const [filterValues, setFilterValues] = useState({});
+  const [updateRecords, setUpdateRecords] = useState(true);
 
   useEffect(() => {
-    // Open the indexedDB database
-    idb.openCostsDB("costs", 1).then((db) => {
-      if (!(db instanceof CostTransactionsService)) {
-        // Throw an exception if the database type is invalid
-        throw new InvalidTypeException(
-          "db",
-          typeof db,
-          "CostTransactionsService"
-        );
-      }
+    if (updateRecords) {
+      // Open the indexedDB database
+      idb.openCostsDB("costs", 1).then((db) => {
+        if (!(db instanceof CostTransactionsService)) {
+          // Throw an exception if the database type is invalid
+          throw new InvalidTypeException(
+            "db",
+            typeof db,
+            "CostTransactionsService"
+          );
+        }
 
-      // Add a cost transaction record to the database
-      db.addCost({
-        category: "FOOD",
-        description: "Salad",
-        sum: 10,
-      });
+        // Add a cost transaction record to the database
+        db.addCost({
+          category: "FOOD",
+          description: "Salad",
+          sum: 10,
+        });
 
-      // Retrieve all cost transactions from the database
-      db.getAllCosts().then((costTransactions) => {
-        setCostTransactionRecords(costTransactions);
+        // Retrieve all cost transactions from the database
+        db.getAllCosts().then((costTransactions) => {
+          setCostTransactionRecords(costTransactions);
+        });
       });
-    });
-  }, []);
+      setUpdateRecords(false);
+    }
+  }, [updateRecords]);
 
   useEffect(() => {
     // Log the cost transaction records to the console
@@ -69,7 +73,7 @@ const App = () => {
     <div className="App">
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <ThemeProvider theme={theme}>
-          <HitTable costTransactionRecords={costTransactionRecords}/>
+          <HitTable onUpdateRecords={()=>setUpdateRecords(true)} costTransactionRecords={costTransactionRecords} />
           {/* <HitLabel fontType='title' bold={false}>dfsdsfds</HitLabel> */}
           <HitTextInput options={["dsfsdf"]} label="Choose Category" />
           <HitFilter filtersState={[filterValues, setFilterValues]}></HitFilter>

@@ -15,10 +15,11 @@ import HitButtonGroup from "../hit-button-group/hit-button-group";
  * HIT Table Toolbar control - Encapsulates Material-UI's toolbar for custom reusability.
  * The header component of the table with title and options buttons.
  * @param {Object} properties - Component's properties (currently no properties).
+ * ** onUpdateRecords -callback to execute on refresh button click.
  * @returns HIT Table Toolbar control component.
  */
 const HitTableToolbar = (props) => {
-  const { } = props;
+  const {onUpdateRecords } = props;
 
   return (
     <Toolbar>
@@ -31,7 +32,7 @@ const HitTableToolbar = (props) => {
       >
         Nutrition
       </Typography>
-      <HitButtonGroup />
+      <HitButtonGroup onUpdateRecords={onUpdateRecords}/>
     </Toolbar>
   );
 };

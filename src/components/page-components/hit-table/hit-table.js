@@ -16,16 +16,6 @@ import HitTableHeader from "../../extended-controls/hit-table-header/hit-table-h
 import HitTableToolbar from "../../extended-controls/hit-table-toolbar/hit-table-toolbar";
 import HitTableBody from "../../extended-controls/hit-table-body/hit-table-body";
 
-// Helper function to create data rows
-const createData = (date, category, description, sum) => {
-  return {
-    date,
-    category,
-    description,
-    sum,
-  };
-};
-
 
 const descendingComparator = (a, b, orderBy) => {
   if (b[orderBy] < a[orderBy]) {
@@ -87,10 +77,11 @@ const headCells = [
  * HIT Table control - Encapsulates MUI's complexity and providing dedicated flexiblity and custom reusability.
  * @param {Object} properties - Cpmponent's properties:
 ** costTransactionRecords - All rows to show.
+** onUpdateRecords - callback to invoke for update records from idb.
  * @returns HIT Table control component.
  */
 const HitTable = (props) => {
-  const {costTransactionRecords}=props;
+  const {costTransactionRecords,onUpdateRecords}=props;
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("date");
   const [selected, setSelected] = useState([]);
@@ -133,7 +124,7 @@ const HitTable = (props) => {
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
-        <HitTableToolbar />
+        <HitTableToolbar onUpdateRecords={onUpdateRecords}/>
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
