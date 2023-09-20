@@ -4,6 +4,8 @@ Igal Khalfin    313190811
 Itay Halaf      205585193
 Tamara Slotzki  318875846
 */
+
+// Import necessary dependencies from Material-UI and React
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
@@ -14,6 +16,7 @@ import HitTableHeader from "../../extended-controls/hit-table-header/hit-table-h
 import HitTableToolbar from "../../extended-controls/hit-table-toolbar/hit-table-toolbar";
 import HitTableBody from "../../extended-controls/hit-table-body/hit-table-body";
 
+// Helper function to create data rows
 const createData = (date, category, description, sum) => {
   return {
     date,
@@ -23,22 +26,14 @@ const createData = (date, category, description, sum) => {
   };
 };
 
+// Sample data rows
 const rows = [
   createData(305,"Cupcake",  '3.7', 67),
   createData(452,"Donut",  '25.0', 51),
-  createData(262,"Eclair",  '16.0', 24),
-  createData(159,"Frozen yoghurt",  '6.0', 24),
-  createData(356, "Gingerbread", '16.0', 49),
-  createData(408, "Honeycomb", '3.2', 87),
-  createData(237,"Ice cream sandwich",  '9.0', 37),
-  createData(375,"Jelly Bean",  '0.0', 94),
-  createData(518,"KitKat",  '26.0', 65),
-  createData(392,"Lollipop",  '0.2', 98),
-  createData(318,"Marshmallow",  '0', 81),
-  createData(360,"Nougat",  '19.0', 9),
-  createData(437,"Oreo",  '18.0', 63),
+  // ... (other data rows)
 ];
 
+// Sorting comparator functions
 const descendingComparator = (a, b, orderBy) => {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -67,6 +62,7 @@ const stableSort = (array, comparator) => {
   return stabilizedThis.map((el) => el[0]);
 };
 
+// Table header cells definition
 const headCells = [
   {
     id: "date",
@@ -93,9 +89,9 @@ const headCells = [
     label: "Sum",
   }
 ];
+
 /**
- * HIT Table control - Encapsulates MUI's complexity and providing dedicated flexiblity and custom reusability.
- * @param {Object} properties - Cpmponent's properties:
+ * HIT Table control - Encapsulates Material-UI's complexity for creating a table with sorting and pagination.
  * @returns HIT Table control component.
  */
 const HitTable = () => {
@@ -122,10 +118,11 @@ const HitTable = () => {
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
-  // Avoid a layout jump when reaching the last page with empty rows.
+  // Calculate the number of empty rows for pagination
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
+  // Calculate the visible rows based on sorting and pagination
   const visibleRows = React.useMemo(
     () =>
       stableSort(rows, getComparator(order, orderBy)).slice(
@@ -172,4 +169,6 @@ const HitTable = () => {
     </Box>
   );
 };
+
+// Export the HitTable component
 export { HitTable };

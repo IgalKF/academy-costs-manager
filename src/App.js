@@ -1,9 +1,11 @@
 /*
-Team Members:
-Igal Khalfin    313190811
-Itay Halaf      205585193
-Tamara Slotzki  318875846
+👥 Team Members:
+👤 Igal Khalfin    313190811
+👤 Itay Halaf      205585193
+👤 Tamara Slotzki  318875846
 */
+
+// Import necessary modules and components
 import "./App.css";
 import { HitDatepicker } from "./components/base-controls/hit-datepicker/hit-datepicker";
 import { theme } from "./themes/default-theme";
@@ -24,8 +26,10 @@ const App = () => {
   const [costTransactionRecords, setCostTransactionRecords] = useState([]);
 
   useEffect(() => {
+    // Open the indexedDB database
     idb.openCostsDB("costs", 1).then((db) => {
       if (!(db instanceof CostTransactionsService)) {
+        // Throw an exception if the database type is invalid
         throw new InvalidTypeException(
           "db",
           typeof db,
@@ -33,12 +37,14 @@ const App = () => {
         );
       }
 
+      // Add a cost transaction record to the database
       db.addCost({
         category: "FOOD",
         description: "Salad",
         sum: 10,
       });
 
+      // Retrieve all cost transactions from the database
       db.getAllCosts().then((costTransactions) => {
         setCostTransactionRecords(costTransactions);
       });
@@ -46,6 +52,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
+    // Log the cost transaction records to the console
     console.log(costTransactionRecords);
   }, [costTransactionRecords]);
 

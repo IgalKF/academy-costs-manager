@@ -5,6 +5,7 @@ Itay Halaf      205585193
 Tamara Slotzki  318875846
 */
 
+// Import necessary dependencies from Material-UI icons and custom styles
 import React from "react";
 import Refresh from '@mui/icons-material/Refresh';
 import Calendar from '@mui/icons-material/CalendarToday';
@@ -13,35 +14,39 @@ import Add from '@mui/icons-material/Add';
 import './hit-icon.css';
 
 /**
- * HIT icon control - Encapsulates MUI's complexity, providing dedicated flexiblity and custom reusability.
- * @param {Object} properties - Cpmponent's properties:
- * @returns Cusom icon element.
+ * HIT icon control - Encapsulates MUI's complexity, providing dedicated flexibility and custom reusability.
+ * @param {Object} properties - Component's properties:
+ * @returns Custom icon element.
  */
 const HitIcon = ({ children }) => {
     let iconElement;
 
-    // Determine an explicit SVG offload.
-    // Expanded by demand.
+    // Determine an explicit SVG offload based on the 'children' prop.
+    // Expanded by demand for specific icon types.
     switch (children) {
         case 'refresh':
-            iconElement = <Refresh />
+            iconElement = <Refresh />; // Render the 'Refresh' icon
             break;
         case 'calendar':
-            iconElement = <Calendar/>
+            iconElement = <Calendar/>; // Render the 'Calendar' icon
             break;
         case 'filter':
-            iconElement = <Filter/>
+            iconElement = <Filter/>; // Render the 'Filter' icon
             break;
         case 'add':
-            iconElement = <Add/>
+            iconElement = <Add/>; // Render the 'Add' icon
             break;
         default:
             break;
     }
 
-    return <div className='hit-icon'>
-        {iconElement}
-    </div>
+    // Render the HitIcon component with the determined icon element
+    return (
+        <div className='hit-icon'>
+            {iconElement}
+        </div>
+    );
 };
 
+// Export the HitIcon component
 export { HitIcon };
