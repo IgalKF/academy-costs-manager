@@ -41,7 +41,7 @@ const HitTableRow = (props) => {
     }
   
     
-    return <TableRow
+  return <TableRow
     id={labelId}
     key={rowData.name}
     selected={isItemSelected}

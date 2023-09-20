@@ -24,7 +24,8 @@ const HitTableBody = (props) => {
     // Property wasn't defined as intended.
     throw new InvalidPropertyException('HitTableBody', 'visibleRows', 'Should be an object.');
   }
-  if (!emptyRows) {
+  if (emptyRows ===undefined) {
+    console.log(emptyRows);
     // Property wasn't defined.
     throw new RequiredPropertyException('HitTableBody ', 'emptyRows');
   }

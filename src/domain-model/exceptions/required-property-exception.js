@@ -6,11 +6,11 @@ import { REQUIRED_PROPERTY_EXCEPTION } from "./constants/exception-constants";
  * * propertyName - The name of the property the exception occured by.
  */
 class RequiredPropertyException extends Error {
-  constructor(componentName, propertyName) {
+  constructor(componentPath, propertyName) {
     super();
 
     // Define error information.
-    this.message = `${componentName} - "${propertyName}" is a required property.`;
+    this.message = `${componentPath} - "${propertyName}" is a required property.`;
     this.name = REQUIRED_PROPERTY_EXCEPTION;
   }
 }
