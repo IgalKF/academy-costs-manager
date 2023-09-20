@@ -81,7 +81,7 @@ const headCells = [
  * @returns HIT Table control component.
  */
 const HitTable = (props) => {
-  const {costTransactionRecords,onUpdateRecords}=props;
+  const {costTransactionRecords,onUpdateRecords,addToDBFunc}=props;
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("date");
   const [selected, setSelected] = useState([]);
@@ -124,7 +124,7 @@ const HitTable = (props) => {
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
-        <HitTableToolbar onUpdateRecords={onUpdateRecords}/>
+        <HitTableToolbar addToDBFunc={addToDBFunc} onUpdateRecords={onUpdateRecords}/>
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}

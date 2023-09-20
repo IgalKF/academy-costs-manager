@@ -16,14 +16,15 @@ import React, { useEffect, useState } from "react";
  * @returns HIT Button Group control component.
  */
 const HitButtonGroup = (props) => {
-  const { onUpdateRecords } = props;
+  const { onAddRecord,onUpdateRecords } = props;
   const [isAddMode, setIsAddMode] = useState(false);
   const [recoredToAdd, setRecordToAdd] = useState({});
 
-  useEffect(() => {
-    console.log(recoredToAdd);
-  }, [recoredToAdd]);
+  const onDialogSubmit=()=>{
+    onAddRecord(recoredToAdd)
+    setIsAddMode(false);
 
+  }
   return (
     <div className="hit-button-group">
       <HitButton
@@ -35,6 +36,7 @@ const HitButtonGroup = (props) => {
         valueState={[recoredToAdd, setRecordToAdd]}
         open={isAddMode}
         onClose={() => setIsAddMode(false)}
+        onSubmit={onDialogSubmit}
       ></HitDialog>
       <HitButton
         title="Filter"

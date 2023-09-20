@@ -35,6 +35,26 @@ const App = () => {
   const [filterValues, setFilterValues] = useState({});
   const [updateRecords, setUpdateRecords] = useState(true);
 
+  const addToDB=(request)=>{
+    idb.openCostsDB("costs", 1).then((db) => {
+      if (!(db instanceof CostTransactionsService)) {
+        // Throw an exception if the database type is invalid
+        throw new InvalidTypeException(
+          "db",
+          typeof db,
+          "CostTransactionsService"
+        );
+      }
+
+      // Add a cost transaction record to the database
+      db.addCost({
+        category: request?.category,
+        description: request?.description,
+        sum: request?.sum,
+      });
+    });
+  }
+
   useEffect(() => {
     if (updateRecords) {
       // Open the indexedDB database
@@ -47,13 +67,6 @@ const App = () => {
             "CostTransactionsService"
           );
         }
-
-        // Add a cost transaction record to the database
-        db.addCost({
-          category: "FOOD",
-          description: "Salad",
-          sum: 10,
-        });
 
         // Retrieve all cost transactions from the database
         db.getAllCosts().then((costTransactions) => {
@@ -73,7 +86,7 @@ const App = () => {
     <div className="App">
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <ThemeProvider theme={theme}>
-          <HitTable onUpdateRecords={()=>setUpdateRecords(true)} costTransactionRecords={costTransactionRecords} />
+          <HitTable addToDBFunc={addToDB} onUpdateRecords={()=>setUpdateRecords(true)} costTransactionRecords={costTransactionRecords} />
           <HitFilter filtersState={[filterValues, setFilterValues]}></HitFilter>
         </ThemeProvider>
       </LocalizationProvider>

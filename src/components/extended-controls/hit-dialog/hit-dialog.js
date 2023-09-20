@@ -20,13 +20,8 @@ import DialogTitle from "@mui/material/DialogTitle";
  */
 
 const HitDialog = (props) => {
-  const { open, onClose, valueState } = props;
+  const { open, onClose,onSubmit, valueState } = props;
   const formOptions = [
-    {
-      key: "Date",
-      type: "date",
-      label: "Date",
-    },
     {
       key: "category",
       type: "select",
@@ -51,7 +46,8 @@ const HitDialog = (props) => {
       </DialogTitle>
       <DialogContent>
         <HitForm
-          submitButtonOptions={{ submitEventCallback: onClose }}
+         closeButtonOptions={{ closeEventCallback: onClose }}
+          submitButtonOptions={{ submitEventCallback: onSubmit }}
           formControls={formOptions}
           valueState={valueState}
         />

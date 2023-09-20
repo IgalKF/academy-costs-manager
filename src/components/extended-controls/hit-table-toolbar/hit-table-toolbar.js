@@ -19,7 +19,7 @@ import HitButtonGroup from "../hit-button-group/hit-button-group";
  * @returns HIT Table Toolbar control component.
  */
 const HitTableToolbar = (props) => {
-  const {onUpdateRecords } = props;
+  const {onUpdateRecords,addToDBFunc } = props;
 
   return (
     <Toolbar>
@@ -32,7 +32,7 @@ const HitTableToolbar = (props) => {
       >
         Costs report
       </Typography>
-      <HitButtonGroup onUpdateRecords={onUpdateRecords}/>
+      <HitButtonGroup onAddRecord={addToDBFunc} onUpdateRecords={onUpdateRecords}/>
     </Toolbar>
   );
 };
