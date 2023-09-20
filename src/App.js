@@ -53,7 +53,7 @@ const App = () => {
     <div className="App">
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <ThemeProvider theme={theme}>
-          <HitTable />
+          <HitTable costTransactionRecords={costTransactionRecords}/>
           <HitDatepicker>dfgdfgdfg</HitDatepicker>
           {/* <HitLabel fontType='title' bold={false}>dfsdsfds</HitLabel> */}
           <HitTextInput options={["dsfsdf"]} label="Choose Category" />

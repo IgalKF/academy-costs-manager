@@ -44,6 +44,7 @@ class CostTransactionsService {
           category: costTransaction.category,
           description: costTransaction.description,
           sum: costTransaction.sum,
+          date: (new Date).toLocaleDateString()
         });
 
       // Resolve promise call with insertion success..
