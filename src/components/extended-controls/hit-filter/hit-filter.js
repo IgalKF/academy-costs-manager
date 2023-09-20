@@ -33,6 +33,10 @@ const HitFilter = ({ filtersState }) => {
             key: 'category',
             type: 'select',
             label: 'Category',
+            options: [
+                'FOOD',
+                'BILLS',
+            ]
         }
     ];
 

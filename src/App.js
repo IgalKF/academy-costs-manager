@@ -70,7 +70,6 @@ const App = () => {
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <ThemeProvider theme={theme}>
           <HitTable costTransactionRecords={costTransactionRecords}/>
-          <HitDatepicker>dfgdfgdfg</HitDatepicker>
           {/* <HitLabel fontType='title' bold={false}>dfsdsfds</HitLabel> */}
           <HitTextInput options={["dsfsdf"]} label="Choose Category" />
           <HitFilter filtersState={[filterValues, setFilterValues]}></HitFilter>

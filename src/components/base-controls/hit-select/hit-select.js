@@ -18,7 +18,7 @@ import { RequiredPropertyException } from "../../../domain-model/exceptions/requ
  * @member {[state, setState]} valueState - State definitions [state, set state function]. 
  * @returns Cusom select element.
  */
-const HitSelect = ({ controlKey, options, label, valueState }) => {
+const HitSelect = ({ controlKey, options, label, valueState, initialValue }) => {
   if (!controlKey) {
     // Property wasn't defined.
     throw new RequiredPropertyException('HitSelect', 'key');
@@ -41,7 +41,7 @@ const HitSelect = ({ controlKey, options, label, valueState }) => {
 
   // Initialize selection state.
   const [value, setValue] = valueState;
-  const selectedValue = value[controlKey] ?? null;
+  const selectedValue = initialValue ?? value[controlKey] ?? null;
 
   const optionsList = options.map((option) => {
     if (option.value && option.label) {

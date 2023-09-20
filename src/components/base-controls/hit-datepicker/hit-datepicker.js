@@ -13,10 +13,18 @@ import './hit-datepicker.css';
  * @param {Object} properties
  * @returns HIT date picker control component.
  */
-const HitDatepicker = ({ label }) => {
+const HitDatepicker = ({ controlKey, label, valueState }) => {
+
+  const [value, setValue] = valueState;
+
+  // Handle selection change.
+  const handleChange = (date) => {
+    setValue({ ...value, [controlKey]: date });
+  };
+
   return <div className='hit-datepicker'>
     <div className="inline-align-container">
-      <DatePicker label={label} />
+      <DatePicker onChange={handleChange} label={label} />
     </div>
   </div>;
 };

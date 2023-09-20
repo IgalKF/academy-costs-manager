@@ -38,14 +38,14 @@ const HitForm = ({ formControls, valueState, closeButtonOptions, submitButtonOpt
             clickEvent={submitButtonOptions?.submitEventCallback}
             type='contained'
             title={submitButtonLabel}/>
-        : null;
+        : undefined;
 
     const closeButtonElement = closeButtonOptions?.closeEventCallback
         ? <HitButton
             clickEvent={closeButtonOptions?.closeEventCallback}
             type='outlined' 
             title={closeButtonLabel}/>
-        : null;
+        : undefined;
 
     // Create an array of control elements based on formControls
     const controlElements = formControls.map(control => {
@@ -91,9 +91,9 @@ const HitForm = ({ formControls, valueState, closeButtonOptions, submitButtonOpt
                         valueState={valueState}
                         controlKey={control.key}
                         key={control.key}
-                        options={control.value ?? []}
                         label={control.label}
-                        initialValue={control.value} />);
+                        initialValue={control.value}
+                        options={control.options} />);
             case 'date':
                 return (
                     <HitDatepicker
@@ -106,7 +106,7 @@ const HitForm = ({ formControls, valueState, closeButtonOptions, submitButtonOpt
                 throw new InvalidPropertyException(
                     'HitForm -> formControls',
                     'type',
-                    `Invalid type was supported: ${control.type}.`)
+                    `Invalid type was supported: ${control.type}.`);
         }
     });
 
