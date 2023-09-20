@@ -93,7 +93,11 @@ const headCells = [
     label: "Sum",
   }
 ];
-
+/**
+ * HIT Table control - Encapsulates MUI's complexity and providing dedicated flexiblity and custom reusability.
+ * @param {Object} properties - Cpmponent's properties:
+ * @returns HIT Table control component.
+ */
 const HitTable = () => {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("date");

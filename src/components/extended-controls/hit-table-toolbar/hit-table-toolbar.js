@@ -5,12 +5,16 @@ Itay Halaf      205585193
 Tamara Slotzki  318875846
 */
 import React from "react";
-import { alpha } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import HitButtonGroup from "../hit-button-group/hit-button-group";
 
-//The header component of the table with title and options buttons
+/**
+ * HIT Table Toolbar control - Encapsulates MUI's complexity and providing dedicated flexiblity and custom reusability.
+ * The header component of the table with title and options buttons
+ * @param {Object} properties - Cpmponent's properties:
+ * @returns HIT Table Toolbar control component.
+ */
 const HitTableToolbar = (props) => {
   const { } = props;
 
