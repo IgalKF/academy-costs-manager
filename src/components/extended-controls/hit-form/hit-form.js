@@ -8,35 +8,88 @@ import { HitDatepicker } from "../../base-controls/hit-datepicker/hit-datepicker
 import { HitButton } from "../../base-controls/hit-button/hit-button";
 import './hit-form.css'
 
-const HitForm = ({ formControls, closeButtonOptions, submitButtonOptions }) => {
+const HitForm = ({ formControls, valueState, closeButtonOptions, submitButtonOptions }) => {
 
     if (!Array.isArray(formControls)) {
         throw new InvalidPropertyException('HitForm', 'formControls', 'Should be an array.');
     }
 
-    const closeButtonLabel = closeButtonOptions.label ?? 'Submit';
-    const submitButtonLabel = submitButtonOptions.label ?? 'Submit';
+    // Initialize default labels for the form.
+    const closeButtonLabel = closeButtonOptions?.label ?? 'Close';
+    const submitButtonLabel = submitButtonOptions?.label ?? 'Submit';
+
+    const submitbuttonElement = submitButtonOptions?.submitEventCallback
+        ? <HitButton
+            clickEvent={submitButtonOptions?.submitEventCallback}
+            type='contained'
+            title={submitButtonLabel}/>
+        : null;
+
+    const closeButtonElement = closeButtonOptions?.closeEventCallback
+        ? <HitButton
+            clickEvent={closeButtonOptions?.closeEventCallback}
+            type='outlined' 
+            title={closeButtonLabel}/>
+        : null;
 
     const controlElements = formControls.map(control => {
-        // Type is required for every control element.
-        if (!control.type) {
+        if (!control?.type) {
+            // Type is required for every control element.
             throw new RequiredPropertyException('HitForm -> formControls', 'type');
         }
 
-        // If type isn't a string type.
+        if (!control?.key) {
+            // A key is required for every control element.
+            throw new RequiredPropertyException('HitForm -> formControls', 'key');
+        }
+
         if (typeof (control.type) != 'string') {
+            // If type isn't a string type.
             throw new InvalidTypeException('type', typeof (control.type), 'string');
         }
 
+        if (typeof (control.key) != 'string') {
+            // If the key isn't a string type.
+            throw new InvalidTypeException('key', typeof (control.type), 'string');
+        }
+
+        if (!valueState) {
+            // Property wasn't defined.
+            throw new RequiredPropertyException('HitSelect', 'valueState');
+        }
+
+        // Initialize components by requested or default properties.
         switch (control.type) {
             case 'text':
-                return (<HitTextInput></HitTextInput>);
+                return (
+                    <HitTextInput
+                        valueState={valueState}
+                        controlKey={control.key}
+                        key={control.key}
+                        label={control.label}
+                        initialValue={control.value} />);
             case 'select':
-                return (<HitSelect></HitSelect>);
+                return (
+                    <HitSelect
+                        valueState={valueState}
+                        controlKey={control.key}
+                        key={control.key}
+                        options={control.value ?? []}
+                        label={control.label}
+                        initialValue={control.value} />);
             case 'date':
-                return (<HitDatepicker></HitDatepicker>);
+                return (
+                    <HitDatepicker
+                        valueState={valueState}
+                        controlKey={control.key}
+                        key={control.key}
+                        label={control.label}
+                        initialValue={control.value} />);
             default:
-                throw new InvalidPropertyException('HitForm -> formControls', 'type', `Invalid type was supported: ${control.type}.`)
+                throw new InvalidPropertyException(
+                    'HitForm -> formControls',
+                    'type',
+                    `Invalid type was supported: ${control.type}.`)
         }
     });
 
@@ -45,8 +98,8 @@ const HitForm = ({ formControls, closeButtonOptions, submitButtonOptions }) => {
             {controlElements}
         </div>
         <div className='form-actions'>
-            <HitButton type='outlined'>{closeButtonLabel}</HitButton>
-            <HitButton type='contained'>{submitButtonLabel}</HitButton>
+            {closeButtonElement}
+            {submitbuttonElement}
         </div>
     </div>
 };

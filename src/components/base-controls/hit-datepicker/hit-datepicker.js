@@ -7,10 +7,10 @@ import './hit-datepicker.css';
  * @param {Object} properties
  * @returns HIT date picker control component.
  */
-const HitDatepicker = ({ children }) => {
+const HitDatepicker = ({ label }) => {
   return <div className='hit-datepicker'>
     <div className="inline-align-container">
-      <DatePicker label={children} />
+      <DatePicker label={label} />
     </div>
   </div>;
 };

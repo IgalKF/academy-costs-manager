@@ -11,7 +11,17 @@ import { RequiredPropertyException } from "../../../domain-model/exceptions/requ
  * @member {[state, setState]} valueState - State definitions [state, set state function]. 
  * @returns Cusom select element.
  */
-const HitSelect = ({ options, label, valueState }) => {
+const HitSelect = ({ controlKey, options, label, valueState }) => {
+  if (!controlKey) {
+    // Property wasn't defined.
+    throw new RequiredPropertyException('HitSelect', 'key');
+  }
+
+  if (!options) {
+    // Property wasn't defined.
+    throw new RequiredPropertyException('HitSelect', 'options');
+  }
+
   if (!Array.isArray(options)) {
     // Property wasn't defined as intended.
     throw new InvalidPropertyException('HitSelect', 'options', 'Should be an array.');
@@ -22,7 +32,9 @@ const HitSelect = ({ options, label, valueState }) => {
     throw new RequiredPropertyException('HitSelect', 'valueState');
   }
 
+  // Initialize selection state.
   const [value, setValue] = valueState;
+  const selectedValue = value[controlKey] ?? null;
 
   const optionsList = options.map((option) => {
     if (option.value && option.label) {
@@ -53,13 +65,13 @@ const HitSelect = ({ options, label, valueState }) => {
 
   // Handle selection change.
   const handleChange = (event) => {
-    setValue(event.target.value);
+    setValue({ ...value, [controlKey]: event.target.value });
   };
 
   return (
     <FormControl className="hit-select" fullWidth>
       {labelElement}
-      <Select onChange={handleChange} value={value} label={label} labelId={labelId} className="select-input">
+      <Select onChange={handleChange} value={selectedValue} label={label} labelId={labelId} className="select-input">
         {optionsList}
       </Select>
     </FormControl>

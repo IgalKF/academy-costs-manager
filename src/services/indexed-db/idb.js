@@ -37,6 +37,7 @@ class CostTransactionsService {
           category: costTransaction.category,
           description: costTransaction.description,
           sum: costTransaction.sum,
+          date: new Date(),
         });
 
       // Resolve promise call with insertion success..

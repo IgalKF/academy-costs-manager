@@ -9,6 +9,7 @@ import { HitTextInput } from "./components/base-controls/hit-text-input/hit-text
 import { CostTransactionsService, idb } from "./services/indexed-db/idb";
 import { useEffect, useState } from "react";
 import { InvalidTypeException } from "./domain-model/exceptions/invalid-type-exception";
+import { HitFilter } from "./components/extended-controls/hit-filter/hit-filter";
 
 /**
  * Main application component.
@@ -16,6 +17,7 @@ import { InvalidTypeException } from "./domain-model/exceptions/invalid-type-exc
  */
 const App = () => {
   const [costTransactionRecords, setCostTransactionRecords] = useState([]);
+  const [filterValues, setFilterValues] = useState({});
 
   useEffect(() => {
     idb.openCostsDB("costs", 1).then((db) => {
@@ -51,6 +53,7 @@ const App = () => {
           <HitDatepicker>dfgdfgdfg</HitDatepicker>
           {/* <HitLabel fontType='title' bold={false}>dfsdsfds</HitLabel> */}
           <HitTextInput options={["dsfsdf"]} label="Choose Category" />
+          <HitFilter filtersState={[filterValues, setFilterValues]}></HitFilter>
         </ThemeProvider>
       </LocalizationProvider>
     </div>
