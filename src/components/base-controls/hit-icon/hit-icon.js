@@ -2,6 +2,7 @@ import React from "react";
 import Refresh from '@mui/icons-material/Refresh';
 import Calendar from '@mui/icons-material/CalendarToday';
 import Filter from '@mui/icons-material/Tune';
+import Add from '@mui/icons-material/Add';
 import './hit-icon.css';
 
 /**
@@ -23,6 +24,9 @@ const HitIcon = ({ children }) => {
             break;
         case 'filter':
             iconElement = <Filter/>
+            break;
+        case 'add':
+            iconElement = <Add/>
             break;
         default:
             break;

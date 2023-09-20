@@ -1,5 +1,7 @@
 import React from "react";
-import { Button } from '@mui/material';
+import { Button} from '@mui/material';
+import Tooltip from "@mui/material/Tooltip";
+import IconButton from "@mui/material/IconButton";
 import { HitIcon } from "../hit-icon/hit-icon";
 
 /**
@@ -10,12 +12,16 @@ import { HitIcon } from "../hit-icon/hit-icon";
  * * icon - An optional icon to be displayed before the caption.
  * @returns HIT button control component.
  */
-const HitButton = ({ children, type, clickEvent, icon }) => {
+const HitButton = ({title, type, clickEvent, icon }) => {
 
     const iconElement = icon ? <HitIcon>{icon}</HitIcon> : undefined;
 
     return <div className='hit-button'>
-        <Button startIcon={iconElement} onClick={clickEvent} variant={type}>{children}</Button>
+        {icon?(<Tooltip title={title}>
+          <IconButton onClick={clickEvent}>
+            {iconElement}
+          </IconButton>
+        </Tooltip>): (<Button onClick={clickEvent} variant={type}>{title}</Button>)}
     </div>;
 };
 

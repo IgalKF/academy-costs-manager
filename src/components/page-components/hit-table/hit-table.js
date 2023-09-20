@@ -1,40 +1,36 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import HitTableHeader from "../../extended-controls/hit-table-header/hit-table-header";
 import HitTableToolbar from "../../extended-controls/hit-table-toolbar/hit-table-toolbar";
 import HitTableBody from "../../extended-controls/hit-table-body/hit-table-body";
 
-const createData = (name, calories, fat, carbs, protein) => {
+const createData = (date, category, description, sum) => {
   return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
+    date,
+    category,
+    description,
+    sum,
   };
 };
 
 const rows = [
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Donut", 452, 25.0, 51, 4.9),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-  createData("Honeycomb", 408, 3.2, 87, 6.5),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Jelly Bean", 375, 0.0, 94, 0.0),
-  createData("KitKat", 518, 26.0, 65, 7.0),
-  createData("Lollipop", 392, 0.2, 98, 0.0),
-  createData("Marshmallow", 318, 0, 81, 2.0),
-  createData("Nougat", 360, 19.0, 9, 37.0),
-  createData("Oreo", 437, 18.0, 63, 4.0),
+  createData(305,"Cupcake",  '3.7', 67),
+  createData(452,"Donut",  '25.0', 51),
+  createData(262,"Eclair",  '16.0', 24),
+  createData(159,"Frozen yoghurt",  '6.0', 24),
+  createData(356, "Gingerbread", '16.0', 49),
+  createData(408, "Honeycomb", '3.2', 87),
+  createData(237,"Ice cream sandwich",  '9.0', 37),
+  createData(375,"Jelly Bean",  '0.0', 94),
+  createData(518,"KitKat",  '26.0', 65),
+  createData(392,"Lollipop",  '0.2', 98),
+  createData(318,"Marshmallow",  '0', 81),
+  createData(360,"Nougat",  '19.0', 9),
+  createData(437,"Oreo",  '18.0', 63),
 ];
 
 const descendingComparator = (a, b, orderBy) => {
@@ -67,40 +63,34 @@ const stableSort = (array, comparator) => {
 
 const headCells = [
   {
-    id: "name",
+    id: "date",
+    numeric: true,
+    disablePadding: false,
+    label: "Date",
+  },
+  {
+    id: "category",
     numeric: false,
-    disablePadding: true,
-    label: "Dessert (100g serving)",
+    disablePadding: false,
+    label: "Category",
   },
   {
-    id: "calories",
-    numeric: true,
+    id: "description",
+    numeric: false,
     disablePadding: false,
-    label: "Calories",
+    label: "Description",
   },
   {
-    id: "fat",
+    id: "sum",
     numeric: true,
     disablePadding: false,
-    label: "Fat (g)",
-  },
-  {
-    id: "carbs",
-    numeric: true,
-    disablePadding: false,
-    label: "Carbs (g)",
-  },
-  {
-    id: "protein",
-    numeric: true,
-    disablePadding: false,
-    label: "Protein (g)",
-  },
+    label: "Sum",
+  }
 ];
 
 const HitTable = () => {
   const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("calories");
+  const [orderBy, setOrderBy] = React.useState("date");
   const [selected, setSelected] = useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -138,11 +128,10 @@ const HitTable = () => {
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
-        <HitTableToolbar numSelected={selected.length} />
+        <HitTableToolbar />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
             size={"medium"}
           >
             <HitTableHeader
@@ -153,7 +142,11 @@ const HitTable = () => {
               onRequestSort={handleRequestSort}
               rowCount={rows.length}
             />
-            <HitTableBody isSelected={isSelected} visibleRows={visibleRows} emptyRows={emptyRows} />
+            <HitTableBody
+              isSelected={isSelected}
+              visibleRows={visibleRows}
+              emptyRows={emptyRows}
+            />
           </Table>
         </TableContainer>
         <TablePagination

@@ -7,18 +7,11 @@ const HitTableRow = (props) => {
     key={rowData.name}
     selected={isItemSelected}
   >
-    <TableCell
-      component="th"
-      id={labelId}
-      scope="row"
-      padding="none"
-    >
-      {rowData.name}
-    </TableCell>
-    <TableCell align="right">{rowData.calories}</TableCell>
-    <TableCell align="right">{rowData.fat}</TableCell>
-    <TableCell align="right">{rowData.carbs}</TableCell>
-    <TableCell align="right">{rowData.protein}</TableCell>
+
+    <TableCell >{rowData.date}</TableCell>
+    <TableCell >{rowData.category}</TableCell>
+    <TableCell >{rowData.description}</TableCell>
+    <TableCell >{rowData.sum}</TableCell>
   </TableRow>
 };
 
