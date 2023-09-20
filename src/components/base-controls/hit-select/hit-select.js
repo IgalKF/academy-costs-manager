@@ -1,3 +1,10 @@
+/*
+Team Members:
+Igal Khalfin    313190811
+Itay Halaf      205585193
+Tamara Slouzky  318875846
+*/
+
 import React from "react";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { InvalidPropertyException } from "../../../domain-model/exceptions/invalid-property-exception";

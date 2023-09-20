@@ -1,3 +1,11 @@
+/*
+Team Members:
+Igal Khalfin    313190811
+Itay Halaf      205585193
+Tamara Slouzky  318875846
+*/
+
+// Import necessary dependencies from Material-UI and React
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
@@ -8,6 +16,7 @@ import HitTableHeader from "../../extended-controls/hit-table-header/hit-table-h
 import HitTableToolbar from "../../extended-controls/hit-table-toolbar/hit-table-toolbar";
 import HitTableBody from "../../extended-controls/hit-table-body/hit-table-body";
 
+// Helper function to create data rows
 const createData = (date, category, description, sum) => {
   return {
     date,
@@ -17,21 +26,6 @@ const createData = (date, category, description, sum) => {
   };
 };
 
-const rows = [
-  createData(305,"Cupcake",  '3.7', 67),
-  createData(452,"Donut",  '25.0', 51),
-  createData(262,"Eclair",  '16.0', 24),
-  createData(159,"Frozen yoghurt",  '6.0', 24),
-  createData(356, "Gingerbread", '16.0', 49),
-  createData(408, "Honeycomb", '3.2', 87),
-  createData(237,"Ice cream sandwich",  '9.0', 37),
-  createData(375,"Jelly Bean",  '0.0', 94),
-  createData(518,"KitKat",  '26.0', 65),
-  createData(392,"Lollipop",  '0.2', 98),
-  createData(318,"Marshmallow",  '0', 81),
-  createData(360,"Nougat",  '19.0', 9),
-  createData(437,"Oreo",  '18.0', 63),
-];
 
 const descendingComparator = (a, b, orderBy) => {
   if (b[orderBy] < a[orderBy]) {
@@ -61,6 +55,7 @@ const stableSort = (array, comparator) => {
   return stabilizedThis.map((el) => el[0]);
 };
 
+// Table header cells definition
 const headCells = [
   {
     id: "date",
@@ -88,7 +83,14 @@ const headCells = [
   }
 ];
 
-const HitTable = () => {
+/**
+ * HIT Table control - Encapsulates MUI's complexity and providing dedicated flexiblity and custom reusability.
+ * @param {Object} properties - Cpmponent's properties:
+** costTransactionRecords - All rows to show.
+ * @returns HIT Table control component.
+ */
+const HitTable = (props) => {
+  const {costTransactionRecords}=props;
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("date");
   const [selected, setSelected] = useState([]);
@@ -112,13 +114,16 @@ const HitTable = () => {
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
-  // Avoid a layout jump when reaching the last page with empty rows.
+  // Calculate the number of empty rows for pagination
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - costTransactionRecords?.length) : 0;
 
+    console.log('emptyRows',emptyRows);
+
+  // Calculate the visible rows based on sorting and pagination
   const visibleRows = React.useMemo(
     () =>
-      stableSort(rows, getComparator(order, orderBy)).slice(
+      stableSort(costTransactionRecords, getComparator(order, orderBy)).slice(
         page * rowsPerPage,
         page * rowsPerPage + rowsPerPage
       ),
@@ -140,7 +145,7 @@ const HitTable = () => {
               order={order}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              rowCount={costTransactionRecords?.length}
             />
             <HitTableBody
               isSelected={isSelected}
@@ -152,7 +157,7 @@ const HitTable = () => {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={rows.length}
+          count={costTransactionRecords?.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
@@ -162,4 +167,6 @@ const HitTable = () => {
     </Box>
   );
 };
+
+// Export the HitTable component
 export { HitTable };

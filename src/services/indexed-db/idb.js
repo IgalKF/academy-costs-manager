@@ -1,3 +1,10 @@
+/*
+Team Members:
+Igal Khalfin    313190811
+Itay Halaf      205585193
+Tamara Slouzky  318875846
+*/
+
 /**
  * Indexed database service containing declaration for Indexed DB operations.
  */
@@ -37,7 +44,7 @@ class CostTransactionsService {
           category: costTransaction.category,
           description: costTransaction.description,
           sum: costTransaction.sum,
-          date: new Date(),
+          date: (new Date).toLocaleDateString()
         });
 
       // Resolve promise call with insertion success..

@@ -1,11 +1,25 @@
+/*
+Team Members:
+Igal Khalfin    313190811
+Itay Halaf      205585193
+Tamara Slouzky  318875846
+*/
 import React from "react";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { InvalidPropertyException } from "../../../domain-model/exceptions/invalid-property-exception";
 import { RequiredPropertyException } from "../../../domain-model/exceptions/required-property-exception";
+
+/**
+ * HIT Table Row control - Encapsulates MUI's complexity and providing dedicated flexiblity and custom reusability.
+ * @param {Object} properties - Cpmponent's properties:
+ * * rowData - row properties of each column.
+ * * labelId - unique row id.
+ * * isItemSelected - checks if the row should be displayed.
+ * @returns HIT Table Row control component.
+ */
 const HitTableRow = (props) => {
-  const { rowData, labelId, isItemSelected } = props;
-    console.log(isItemSelected);
+    const {rowData,labelId,isItemSelected}=props;
 
     if (!rowData) {
       // Property wasn't defined.
