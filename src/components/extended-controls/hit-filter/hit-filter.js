@@ -11,11 +11,6 @@ import { InvalidPropertyException } from "../../../domain-model/exceptions/inval
 import { HitForm } from "../hit-form/hit-form";
 
 // Define the HitFilter component
-const HitFilter = ({ filters }) => {
-    // Check if 'filters' is an array; if not, throw an exception
-    if (!Array.isArray(filters)) {
-        // Property 'filters' wasn't defined as intended.
-        throw new InvalidPropertyException('HitFilter', 'filters', 'Should be an array.');
 const HitFilter = ({ filtersState }) => {
     if (!Array.isArray(filtersState) || filtersState.length !== 2) {
         // filterState should be a state definition.
@@ -42,7 +37,11 @@ const HitFilter = ({ filtersState }) => {
     ];
 
     return (<div className='hit-filter'>
-        <HitForm submitButtonOptions={{submitEventCallback: () => {}}} closeButtonOptions={{closeEventCallback: () => {}}}  valueState={filtersState} formControls={filterFormOptions}/ >
+        <HitForm
+            submitButtonOptions={{ submitEventCallback: () => { } }}
+            closeButtonOptions={{ closeEventCallback: () => { } }}
+            valueState={filtersState} formControls={filterFormOptions}
+        />
     </div>);
 };
 
