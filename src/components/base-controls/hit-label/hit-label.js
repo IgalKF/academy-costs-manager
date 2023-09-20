@@ -1,3 +1,10 @@
+/*
+Team Members:
+Igal Khalfin    313190811
+Itay Halaf      205585193
+Tamara Slotzki  318875846
+*/
+
 import React from "react";
 import './hit-label.css'
 import { FormControl, InputLabel } from "@mui/material";
