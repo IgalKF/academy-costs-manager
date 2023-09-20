@@ -30,7 +30,7 @@ const HitTableToolbar = (props) => {
         id="tableTitle"
         component="div"
       >
-        Nutrition
+        Costs report
       </Typography>
       <HitButtonGroup onUpdateRecords={onUpdateRecords}/>
     </Toolbar>
