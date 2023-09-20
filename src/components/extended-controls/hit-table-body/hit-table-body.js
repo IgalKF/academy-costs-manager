@@ -16,7 +16,7 @@ const HitTableBody = (props) => {
           <HitTableRow
             rowData={row}
             labelId={labelId}
-            isItemSelected={isItemSelected}
+            isItemSelected={false}
           />
         );
       })}
