@@ -4,6 +4,8 @@ Igal Khalfin    313190811
 Itay Halaf      205585193
 Tamara Slouzky  318875846
 */
+
+// Import necessary dependencies from Material-UI and React
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
@@ -14,6 +16,7 @@ import HitTableHeader from "../../extended-controls/hit-table-header/hit-table-h
 import HitTableToolbar from "../../extended-controls/hit-table-toolbar/hit-table-toolbar";
 import HitTableBody from "../../extended-controls/hit-table-body/hit-table-body";
 
+// Helper function to create data rows
 const createData = (date, category, description, sum) => {
   return {
     date,
@@ -52,6 +55,7 @@ const stableSort = (array, comparator) => {
   return stabilizedThis.map((el) => el[0]);
 };
 
+// Table header cells definition
 const headCells = [
   {
     id: "date",
@@ -78,6 +82,7 @@ const headCells = [
     label: "Sum",
   }
 ];
+
 /**
  * HIT Table control - Encapsulates MUI's complexity and providing dedicated flexiblity and custom reusability.
  * @param {Object} properties - Cpmponent's properties:
@@ -109,12 +114,13 @@ const HitTable = (props) => {
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
-  // Avoid a layout jump when reaching the last page with empty rows.
+  // Calculate the number of empty rows for pagination
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - costTransactionRecords?.length) : 0;
 
     console.log('emptyRows',emptyRows);
 
+  // Calculate the visible rows based on sorting and pagination
   const visibleRows = React.useMemo(
     () =>
       stableSort(costTransactionRecords, getComparator(order, orderBy)).slice(
@@ -161,4 +167,6 @@ const HitTable = (props) => {
     </Box>
   );
 };
+
+// Export the HitTable component
 export { HitTable };

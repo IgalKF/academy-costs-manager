@@ -1,9 +1,18 @@
 /*
+<<<<<<< HEAD
+👥 Team Members:
+👤 Igal Khalfin    313190811
+👤 Itay Halaf      205585193
+👤 Tamara Slotzki  318875846
+=======
 Team Members:
 Igal Khalfin    313190811
 Itay Halaf      205585193
 Tamara Slouzky  318875846
+>>>>>>> 459bf6253ebd4d8d42c6aa50d634d643251e112f
 */
+
+/* Reset default styles and set font-family for better readability */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -13,6 +22,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Define font-family for code elements */
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

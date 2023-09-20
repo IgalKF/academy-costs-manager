@@ -4,6 +4,8 @@ Igal Khalfin    313190811
 Itay Halaf      205585193
 Tamara Slouzky  318875846
 */
+
+// Import necessary dependencies from Material-UI
 import React from "react";
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
@@ -12,9 +14,21 @@ import Box from '@mui/material/Box';
 import { visuallyHidden } from '@mui/utils';
 import TableSortLabel from '@mui/material/TableSortLabel';
 
+/**
+ * HIT Table Header control - Encapsulates Material-UI's table header for custom reusability.
+ * @param {Object} props - Component's properties:
+ * @member {Array} headCells - An array of objects defining the table header cells.
+ * @member {string} order - The current sorting order ('asc' or 'desc').
+ * @member {string} orderBy - The currently sorted column ID.
+ * @member {number} numSelected - The number of selected rows (used for multi-select tables).
+ * @member {number} rowCount - The total number of rows in the table.
+ * @member {function} onRequestSort - The callback function for sorting columns.
+ * @returns HIT Table Header control component.
+ */
 const HitTableHeader = (props) => {
-    const {headCells, order, orderBy, numSelected, rowCount, onRequestSort } =
-      props;
+    const { headCells, order, orderBy, numSelected, rowCount, onRequestSort } = props;
+
+    // Function to create a sort handler for a specific property
     const createSortHandler = (property) => (event) => {
       onRequestSort(event, property);
     };
@@ -43,9 +57,9 @@ const HitTableHeader = (props) => {
             </TableCell>
           ))}
         </TableRow>
-      </TableHead>)
+      </TableHead>
+    );
 };
 
-
-
-export default HitTableHeader ;
+// Export the HitTableHeader component
+export default HitTableHeader;
