@@ -35,8 +35,7 @@ const HitFilter = ({ filterState, showFilter }) => {
             type: 'select',
             label: 'Category',
             options: [
-                'FOOD',
-                'BILLS',
+                "FOOD", "HEALTH", "EDUCATION", "TRAVEL", "HOUSING", "OTHER"
             ]
         }
     ];
