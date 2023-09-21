@@ -17,66 +17,6 @@ import HitTableToolbar from "../../extended-controls/hit-table-toolbar/hit-table
 import HitTableBody from "../../extended-controls/hit-table-body/hit-table-body";
 import { HitFilter } from "../../extended-controls/hit-filter/hit-filter";
 
-
-const descendingComparator = (a, b, orderBy) => {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
-};
-
-const getComparator = (order, orderBy) => {
-  return order === "desc"
-    ? (a, b) => descendingComparator(a, b, orderBy)
-    : (a, b) => -descendingComparator(a, b, orderBy);
-};
-
-const stableSort = (array, comparator) => {
-  if (array) {
-    const stabilizedThis = array.map((el, index) => [el, index]);
-    stabilizedThis.sort((a, b) => {
-      const order = comparator(a[0], b[0]);
-      if (order !== 0) {
-        return order;
-      }
-      return a[1] - b[1];
-    });
-
-    return stabilizedThis.map((el) => el[0]);
-  }
-};
-
-// Table header cells definition
-const headCells = [
-  {
-    id: "date",
-    numeric: true,
-    disablePadding: false,
-    label: "Date",
-  },
-  {
-    id: "category",
-    numeric: false,
-    disablePadding: false,
-    label: "Category",
-  },
-  {
-    id: "description",
-    numeric: false,
-    disablePadding: false,
-    label: "Description",
-  },
-  {
-    id: "sum",
-    numeric: true,
-    disablePadding: false,
-    label: "Sum",
-  }
-];
-
 /**
  * HIT Table control - Encapsulates MUI's complexity and providing dedicated flexiblity and custom reusability.
  * @param {Object} properties - Cpmponent's properties:
@@ -173,6 +113,65 @@ const HitTable = ({ costTransactionRecords, onUpdateRecords, addToDBFunc, filter
     </Box>
   );
 };
+
+const descendingComparator = (a, b, orderBy) => {
+  if (b[orderBy] < a[orderBy]) {
+    return -1;
+  }
+  if (b[orderBy] > a[orderBy]) {
+    return 1;
+  }
+  return 0;
+};
+
+const getComparator = (order, orderBy) => {
+  return order === "desc"
+    ? (a, b) => descendingComparator(a, b, orderBy)
+    : (a, b) => -descendingComparator(a, b, orderBy);
+};
+
+const stableSort = (array, comparator) => {
+  if (array) {
+    const stabilizedThis = array.map((el, index) => [el, index]);
+    stabilizedThis.sort((a, b) => {
+      const order = comparator(a[0], b[0]);
+      if (order !== 0) {
+        return order;
+      }
+      return a[1] - b[1];
+    });
+
+    return stabilizedThis.map((el) => el[0]);
+  }
+};
+
+// Table header cells definition
+const headCells = [
+  {
+    id: "date",
+    numeric: true,
+    disablePadding: false,
+    label: "Date",
+  },
+  {
+    id: "category",
+    numeric: false,
+    disablePadding: false,
+    label: "Category",
+  },
+  {
+    id: "description",
+    numeric: false,
+    disablePadding: false,
+    label: "Description",
+  },
+  {
+    id: "sum",
+    numeric: true,
+    disablePadding: false,
+    label: "Sum",
+  }
+];
 
 // Export the HitTable component
 export { HitTable };
