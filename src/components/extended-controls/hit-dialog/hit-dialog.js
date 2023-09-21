@@ -29,16 +29,19 @@ const HitDialog = (props) => {
       type: "select",
       label: "Category",
       options: ["FOOD", "HEALTH", "EDUCATION", "TRAVEL", "HOUSING", "OTHER"],
+      required: true,
     },
     {
       key: "description",
       type: "text",
       label: "Description",
+      required: true,
     },
     {
       key: "sum",
       type: "number",
       label: "Sum",
+      required: true,
     },
   ];
   return (
