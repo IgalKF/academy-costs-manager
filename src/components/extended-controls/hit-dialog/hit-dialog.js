@@ -37,7 +37,7 @@ const HitDialog = (props) => {
     },
     {
       key: "sum",
-      type: "text",
+      type: "number",
       label: "Sum",
     },
   ];
