@@ -26,7 +26,7 @@ const HitDialog = (props) => {
       key: "category",
       type: "select",
       label: "Category",
-      options: ["FOOD", "BILLS"],
+      options: ["FOOD", "HEALTH", "EDUCATION", "TRAVEL", "HOUSING", "OTHER"],
     },
     {
       key: "description",
