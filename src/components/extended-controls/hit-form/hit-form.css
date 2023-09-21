@@ -5,3 +5,16 @@
     gap: 1rem;
     justify-content: end;
 }
+
+.form-content {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    width: 100%;
+}
+
+.form-column {
+    display: flex;
+    flex-direction: column;
+    min-width: 400px;
+}

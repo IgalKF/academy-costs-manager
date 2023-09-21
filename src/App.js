@@ -14,17 +14,15 @@ Tamara Slouzky  318875846
 
 // Import necessary modules and components
 import "./App.css";
-import { HitDatepicker } from "./components/base-controls/hit-datepicker/hit-datepicker";
 import { theme } from "./themes/default-theme";
 import { ThemeProvider } from "@mui/material/styles";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { HitTable } from "./components/page-components/hit-table/hit-table";
-import { HitTextInput } from "./components/base-controls/hit-text-input/hit-text-input";
 import { CostTransactionsService, idb } from "./services/indexed-db/idb";
 import { useEffect, useState } from "react";
 import { InvalidTypeException } from "./domain-model/exceptions/invalid-type-exception";
-import { HitFilter } from "./components/extended-controls/hit-filter/hit-filter";
+import { HitHeader } from "./components/page-components/hit-header/hit-header";
 
 /**
  * Main application component.
@@ -33,9 +31,10 @@ import { HitFilter } from "./components/extended-controls/hit-filter/hit-filter"
 const App = () => {
   const [costTransactionRecords, setCostTransactionRecords] = useState([]);
   const [filterValues, setFilterValues] = useState({});
+  const [filteredRecords, setFilteredRecordes] = useState([]);
   const [updateRecords, setUpdateRecords] = useState(true);
 
-  const addToDB=(request)=>{
+  const addToDB = (request) => {
     idb.openCostsDB("costs", 1).then((db) => {
       if (!(db instanceof CostTransactionsService)) {
         // Throw an exception if the database type is invalid
@@ -71,6 +70,7 @@ const App = () => {
         // Retrieve all cost transactions from the database
         db.getAllCosts().then((costTransactions) => {
           setCostTransactionRecords(costTransactions);
+          setFilteredRecordes(costTransactions);
         });
       });
       setUpdateRecords(false);
@@ -78,16 +78,38 @@ const App = () => {
   }, [updateRecords]);
 
   useEffect(() => {
-    // Log the cost transaction records to the console
-    console.log(costTransactionRecords);
-  }, [costTransactionRecords]);
+    if (costTransactionRecords) {
+      setFilteredRecordes(records => {
+        records = [...costTransactionRecords];
+
+        if (filterValues.fromDate) {
+          records = records.filter(record => new Date(record.date) >= filterValues.fromDate);
+        }
+
+        if (filterValues.toDate) {
+          records = records.filter(record => new Date(record.date) <= filterValues.toDate);
+        }
+
+        if (filterValues.category) {
+          records = records.filter(record => record.category === filterValues.category);
+        }
+
+        return records;
+      });
+    }
+  }, [filterValues, costTransactionRecords]);
 
   return (
     <div className="App">
+      <HitHeader />
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <ThemeProvider theme={theme}>
-          <HitTable addToDBFunc={addToDB} onUpdateRecords={()=>setUpdateRecords(true)} costTransactionRecords={costTransactionRecords} />
-          <HitFilter filtersState={[filterValues, setFilterValues]}></HitFilter>
+          <HitTable
+            filterState={[filterValues, setFilterValues]}
+            addToDBFunc={addToDB}
+            onUpdateRecords={() => setUpdateRecords(true)}
+            costTransactionRecords={filteredRecords}
+          />
         </ThemeProvider>
       </LocalizationProvider>
     </div>

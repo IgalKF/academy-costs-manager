@@ -19,17 +19,17 @@ import { HitButton } from "../../base-controls/hit-button/hit-button";
 
 // Import styles for the component
 import './hit-form.css'
+import { FormGroup } from "@mui/material";
 
 // Define the HitForm component
-const HitForm = ({ formControls, valueState, closeButtonOptions, submitButtonOptions }) => {
+const HitForm = ({ formControls, valueState, closeButtonOptions, submitButtonOptions, formColumns }) => {
 
     // Validate that formControls is an array
     if (!Array.isArray(formControls)) {
         throw new InvalidPropertyException('HitForm', 'formControls', 'Should be an array.');
     }
 
-    // Initialize default labels for the form.
-    // Define default labels for buttons
+    // Define default labels for buttons.
     const closeButtonLabel = closeButtonOptions?.label ?? 'Close';
     const submitButtonLabel = submitButtonOptions?.label ?? 'Submit';
 
@@ -37,14 +37,14 @@ const HitForm = ({ formControls, valueState, closeButtonOptions, submitButtonOpt
         ? <HitButton
             clickEvent={submitButtonOptions?.submitEventCallback}
             type='contained'
-            title={submitButtonLabel}/>
+            title={submitButtonLabel} />
         : undefined;
 
     const closeButtonElement = closeButtonOptions?.closeEventCallback
         ? <HitButton
             clickEvent={closeButtonOptions?.closeEventCallback}
-            type='outlined' 
-            title={closeButtonLabel}/>
+            type='outlined'
+            title={closeButtonLabel} />
         : undefined;
 
     // Create an array of control elements based on formControls
@@ -84,7 +84,8 @@ const HitForm = ({ formControls, valueState, closeButtonOptions, submitButtonOpt
                         controlKey={control.key}
                         key={control.key}
                         label={control.label}
-                        initialValue={control.value} />);
+                        initialValue={control.value}
+                    />);
             case 'select':
                 return (
                     <HitSelect
@@ -93,7 +94,8 @@ const HitForm = ({ formControls, valueState, closeButtonOptions, submitButtonOpt
                         key={control.key}
                         label={control.label}
                         initialValue={control.value}
-                        options={control.options} />);
+                        options={control.options}
+                    />);
             case 'date':
                 return (
                     <HitDatepicker
@@ -101,7 +103,8 @@ const HitForm = ({ formControls, valueState, closeButtonOptions, submitButtonOpt
                         controlKey={control.key}
                         key={control.key}
                         label={control.label}
-                        initialValue={control.value} />);
+                        initialValue={control.value}
+                    />);
             default:
                 throw new InvalidPropertyException(
                     'HitForm -> formControls',
@@ -110,16 +113,30 @@ const HitForm = ({ formControls, valueState, closeButtonOptions, submitButtonOpt
         }
     });
 
+
+    // Devide form to columns.
+    const columnElements = [];
+
+    for (let i = 0; i < formColumns; i++) {
+        const columnControls = controlElements
+            .filter((control, index) => index % formColumns === i);
+
+        columnElements.push(<div className='form-column'>{columnControls}</div>);
+    }
+
+    const formContentElements = formColumns > 0 ? columnElements : controlElements;
+
     // Render the HitForm component
-    return <div className='hit-form'>
-        <div className='form-content'>
-            {controlElements}
-        </div>
-        <div className='form-actions'>
-            {closeButtonElement}
-            {submitbuttonElement}
-        </div>
-    </div>
+    return (
+        <FormGroup className='hit-form'>
+            <div className='form-content'>
+                {formContentElements}
+            </div>
+            <div className='form-actions'>
+                {closeButtonElement}
+                {submitbuttonElement}
+            </div>
+        </FormGroup>);
 };
 
 // Export the HitForm component

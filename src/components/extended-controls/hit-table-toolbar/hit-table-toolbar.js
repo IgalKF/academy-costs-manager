@@ -8,8 +8,8 @@ Tamara Slouzky  318875846
 // Import necessary dependencies from Material-UI
 import React from "react";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import HitButtonGroup from "../hit-button-group/hit-button-group";
+import './hit-table-toolbar.css';
 
 /**
  * HIT Table Toolbar control - Encapsulates Material-UI's toolbar for custom reusability.
@@ -18,21 +18,11 @@ import HitButtonGroup from "../hit-button-group/hit-button-group";
  * ** onUpdateRecords -callback to execute on refresh button click.
  * @returns HIT Table Toolbar control component.
  */
-const HitTableToolbar = (props) => {
-  const {onUpdateRecords,addToDBFunc } = props;
+const HitTableToolbar = ({ onUpdateRecords, addToDBFunc, onShowFilter }) => {
 
   return (
-    <Toolbar>
-      {/* Render a title and the HitButtonGroup component within the toolbar */}
-      <Typography
-        sx={{ flex: "1 1 100%" }}
-        variant="h6"
-        id="tableTitle"
-        component="div"
-      >
-        Costs report
-      </Typography>
-      <HitButtonGroup onAddRecord={addToDBFunc} onUpdateRecords={onUpdateRecords}/>
+    <Toolbar className='hit-toolbar'>
+      <HitButtonGroup onShowFilter={onShowFilter} onAddRecord={addToDBFunc} onUpdateRecords={onUpdateRecords} />
     </Toolbar>
   );
 };

@@ -9,12 +9,13 @@ Tamara Slouzky  318875846
 import React from "react";
 import { InvalidPropertyException } from "../../../domain-model/exceptions/invalid-property-exception";
 import { HitForm } from "../hit-form/hit-form";
+import './hit-filter.css';
 
 // Define the HitFilter component
-const HitFilter = ({ filtersState }) => {
-    if (!Array.isArray(filtersState) || filtersState.length !== 2) {
+const HitFilter = ({ filterState, showFilter }) => {
+    if (!Array.isArray(filterState) || filterState.length !== 2) {
         // filterState should be a state definition.
-        throw new InvalidPropertyException('HitFilter', 'filters', 'Should be a state definition with state instance and state function.');
+        throw new InvalidPropertyException('HitFilter', 'filterState', 'Should be a state definition with state instance and state function.');
     }
 
     // Define options for the filter form
@@ -40,11 +41,12 @@ const HitFilter = ({ filtersState }) => {
         }
     ];
 
-    return (<div className='hit-filter'>
+    const collapseClass = showFilter ? '' : ' collapsed';
+
+    return (<div className={'hit-filter' + collapseClass}>
         <HitForm
-            submitButtonOptions={{ submitEventCallback: () => { } }}
-            closeButtonOptions={{ closeEventCallback: () => { } }}
-            valueState={filtersState} formControls={filterFormOptions}
+            valueState={filterState}
+            formControls={filterFormOptions}
         />
     </div>);
 };

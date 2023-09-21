@@ -15,12 +15,11 @@ import React, { useEffect, useState } from "react";
  * ** onUpdateRecords -callback to execute on refresh button click.
  * @returns HIT Button Group control component.
  */
-const HitButtonGroup = (props) => {
-  const { onAddRecord,onUpdateRecords } = props;
+const HitButtonGroup = ({ onAddRecord, onUpdateRecords, onShowFilter }) => {
   const [isAddMode, setIsAddMode] = useState(false);
   const [recoredToAdd, setRecordToAdd] = useState({});
 
-  const onDialogSubmit=()=>{
+  const onDialogSubmit = () => {
     onAddRecord(recoredToAdd)
     setIsAddMode(false);
 
@@ -40,7 +39,7 @@ const HitButtonGroup = (props) => {
       ></HitDialog>
       <HitButton
         title="Filter"
-        clickEvent={() => console.log("filter")}
+        clickEvent={onShowFilter}
         icon="filter"
       ></HitButton>
       <HitButton

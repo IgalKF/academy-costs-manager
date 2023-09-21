@@ -5,12 +5,13 @@ Itay Halaf      205585193
 Tamara Slouzky  318875846
 */
 
-import "./hit-dialog.css";
 import React from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import { HitForm } from "../hit-form/hit-form";
 import DialogTitle from "@mui/material/DialogTitle";
+import "./hit-dialog.css";
+
 /**
  * HIT Dialog control - Encapsulates MUI's complexity and providing dedicated flexiblity and custom reusability.
  * @param {Object} properties - Cpmponent's properties:
@@ -18,9 +19,8 @@ import DialogTitle from "@mui/material/DialogTitle";
  * ** onClose -callback to execute on refresh button click.
  * @returns HIT Dialog control component.
  */
-
 const HitDialog = (props) => {
-  const { open, onClose,onSubmit, valueState } = props;
+  const { open, onClose, onSubmit, valueState } = props;
   const formOptions = [
     {
       key: "category",
@@ -40,13 +40,14 @@ const HitDialog = (props) => {
     },
   ];
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog className="hit-dialog" open={open} onClose={onClose}>
       <DialogTitle id="alert-dialog-title">
         {"Add record"}
       </DialogTitle>
       <DialogContent>
         <HitForm
-         closeButtonOptions={{ closeEventCallback: onClose }}
+          formColumns={1}
+          closeButtonOptions={{ closeEventCallback: onClose }}
           submitButtonOptions={{ submitEventCallback: onSubmit }}
           formControls={formOptions}
           valueState={valueState}

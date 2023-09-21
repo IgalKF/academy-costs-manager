@@ -76,7 +76,7 @@ const HitSelect = ({ controlKey, options, label, valueState, initialValue }) => 
   };
 
   return (
-    <FormControl className="hit-select" fullWidth>
+    <FormControl className="hit-control hit-select">
       {labelElement}
       <Select onChange={handleChange} value={selectedValue} label={label} labelId={labelId} className="select-input">
         {optionsList}

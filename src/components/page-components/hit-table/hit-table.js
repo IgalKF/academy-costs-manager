@@ -15,6 +15,7 @@ import Paper from "@mui/material/Paper";
 import HitTableHeader from "../../extended-controls/hit-table-header/hit-table-header";
 import HitTableToolbar from "../../extended-controls/hit-table-toolbar/hit-table-toolbar";
 import HitTableBody from "../../extended-controls/hit-table-body/hit-table-body";
+import { HitFilter } from "../../extended-controls/hit-filter/hit-filter";
 
 
 const descendingComparator = (a, b, orderBy) => {
@@ -34,15 +35,18 @@ const getComparator = (order, orderBy) => {
 };
 
 const stableSort = (array, comparator) => {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) {
-      return order;
-    }
-    return a[1] - b[1];
-  });
-  return stabilizedThis.map((el) => el[0]);
+  if (array) {
+    const stabilizedThis = array.map((el, index) => [el, index]);
+    stabilizedThis.sort((a, b) => {
+      const order = comparator(a[0], b[0]);
+      if (order !== 0) {
+        return order;
+      }
+      return a[1] - b[1];
+    });
+    
+    return stabilizedThis.map((el) => el[0]);
+  }
 };
 
 // Table header cells definition
@@ -80,11 +84,11 @@ const headCells = [
 ** onUpdateRecords - callback to invoke for update records from idb.
  * @returns HIT Table control component.
  */
-const HitTable = (props) => {
-  const {costTransactionRecords,onUpdateRecords,addToDBFunc}=props;
+const HitTable = ({ costTransactionRecords, onUpdateRecords, addToDBFunc, filterState }) => {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("date");
   const [selected, setSelected] = useState([]);
+  const [showFilter, setShowFilter] = useState(false);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -103,13 +107,17 @@ const HitTable = (props) => {
     setPage(0);
   };
 
+  const handleFilterDisplay = () => {
+    setShowFilter(!showFilter);
+  };
+
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   // Calculate the number of empty rows for pagination
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - costTransactionRecords?.length) : 0;
 
-    console.log('emptyRows',emptyRows);
+  console.log('emptyRows', emptyRows);
 
   // Calculate the visible rows based on sorting and pagination
   const visibleRows = React.useMemo(
@@ -118,13 +126,20 @@ const HitTable = (props) => {
         page * rowsPerPage,
         page * rowsPerPage + rowsPerPage
       ),
-    [order, orderBy, page, rowsPerPage]
+    [order, orderBy, page, rowsPerPage, costTransactionRecords]
   );
 
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
-        <HitTableToolbar addToDBFunc={addToDBFunc} onUpdateRecords={onUpdateRecords}/>
+        <HitTableToolbar
+          addToDBFunc={addToDBFunc}
+          onUpdateRecords={onUpdateRecords}
+          onShowFilter={handleFilterDisplay}
+        />
+        <TableContainer>
+          <HitFilter showFilter={showFilter} filterState={filterState} />
+        </TableContainer>
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}

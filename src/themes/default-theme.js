@@ -14,8 +14,13 @@ const theme = createTheme({
           // The default props to change
           sx: { 
             textTransform: 'none'
-          }, // No more ripple, on the whole application 💣!
+          },
         },
+      },
+      MuiFormControl: {
+        defaultProps: {
+          margin: 'normal',
+        }
       },
     },
   });

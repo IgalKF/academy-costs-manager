@@ -14,7 +14,7 @@ const HitTextInput = ({ label,valueState,controlKey }) => {
         setValue({ ...value, [controlKey]:event?.target?.value });
       };
     return (
-        <FormControl className="hit-select" fullWidth>
+        <FormControl className="hit-control hit-select">
             {/* Render a Material-UI text field with an outlined variant and the specified label */}
             <TextField onBlur={handleChange} variant="outlined" label={label} className="select-input" />
         </FormControl>

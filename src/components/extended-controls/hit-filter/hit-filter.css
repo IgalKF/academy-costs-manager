@@ -1,0 +1,11 @@
+.hit-filter {
+    margin: 1.5rem 1rem 1rem 1rem;
+    transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+    height: 90px;
+    overflow-y: hidden;
+}
+
+.collapsed {
+    height: 0;
+    margin: 0;
+}
