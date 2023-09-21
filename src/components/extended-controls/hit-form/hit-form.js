@@ -27,7 +27,8 @@ const HitForm = (props) => {
         closeButtonOptions,
         submitButtonOptions,
         formColumns,
-        showClearButton } = props;
+        showClearButton 
+    } = props;
 
     // Validate that formControls is an array
     if (!Array.isArray(formControls)) {
@@ -119,6 +120,8 @@ const HitForm = (props) => {
                         key={control.key}
                         label={control.label}
                         initialValue={control.value}
+                        minDateByControl={control.minByControl}
+                        maxDateByControl={control.maxByControl}
                     />);
             default:
                 throw new InvalidPropertyException(

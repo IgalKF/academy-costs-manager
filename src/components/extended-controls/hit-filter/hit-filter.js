@@ -5,7 +5,6 @@ Itay Halaf      205585193
 Tamara Slouzky  318875846
 */
 
-// Import necessary dependencies
 import React from "react";
 import { InvalidPropertyException } from "../../../domain-model/exceptions/invalid-property-exception";
 import { HitForm } from "../hit-form/hit-form";
@@ -25,11 +24,13 @@ const HitFilter = ({ filterState, showFilter }) => {
             key: 'fromDate',
             type: 'date',
             label: 'From',
+            maxByControl: 'toDate',
         },
         {
             key: 'toDate',
             type: 'date',
             label: 'To',
+            minByControl: 'fromDate',
         },
         {
             key: 'category',

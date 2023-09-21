@@ -6,7 +6,7 @@ Tamara Slouzky  318875846
 */
 
 // Import necessary dependencies from Material-UI and React
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableContainer from "@mui/material/TableContainer";
@@ -44,7 +44,7 @@ const stableSort = (array, comparator) => {
       }
       return a[1] - b[1];
     });
-    
+
     return stabilizedThis.map((el) => el[0]);
   }
 };
@@ -126,6 +126,10 @@ const HitTable = ({ costTransactionRecords, onUpdateRecords, addToDBFunc, filter
       ),
     [order, orderBy, page, rowsPerPage, costTransactionRecords]
   );
+
+  useEffect(() => {
+    setPage(0);
+  }, [filterState]);
 
   return (
     <Box sx={{ width: "100%" }}>

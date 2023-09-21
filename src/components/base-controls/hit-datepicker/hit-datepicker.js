@@ -13,7 +13,7 @@ import './hit-datepicker.css';
  * @param {Object} properties
  * @returns HIT date picker control component.
  */
-const HitDatepicker = ({ controlKey, label, valueState }) => {
+const HitDatepicker = ({ controlKey, label, valueState, minDateByControl, maxDateByControl }) => {
 
   const [value, setValue] = valueState;
 
@@ -22,9 +22,12 @@ const HitDatepicker = ({ controlKey, label, valueState }) => {
     setValue({ ...value, [controlKey]: date });
   };
 
+  const minDate = value[minDateByControl];
+  const maxDate = value[maxDateByControl];
+
   return <div className="hit-control hit-datepicker">
     <div className="inline-align-container">
-      <DatePicker format="DD/MM/YYYY" onChange={handleChange} value={value?.[controlKey]} label={label} />
+      <DatePicker minDate={minDate} maxDate={maxDate} format="DD/MM/YYYY" onChange={handleChange} value={value?.[controlKey]} label={label} />
     </div>
   </div>;
 };
