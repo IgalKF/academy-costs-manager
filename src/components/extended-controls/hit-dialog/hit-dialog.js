@@ -16,7 +16,9 @@ import "./hit-dialog.css";
  * HIT Dialog control - Encapsulates MUI's complexity and providing dedicated flexiblity and custom reusability.
  * @param {Object} properties - Cpmponent's properties:
  * ** open -Dialog's state.
- * ** onClose -callback to execute on refresh button click.
+ * ** onClose -callback to execute on Dialog close.
+ * ** onSubmit -callback to execute on submit button click.
+ * ** valueState -state provided to form for ipdate on change.
  * @returns HIT Dialog control component.
  */
 const HitDialog = (props) => {

@@ -16,6 +16,8 @@ import './hit-table-toolbar.css';
  * The header component of the table with title and options buttons.
  * @param {Object} properties - Component's properties (currently no properties).
  * ** onUpdateRecords -callback to execute on refresh button click.
+ * ** addToDBFunc -function for adding recoed to db.
+ * ** onShowFilter -callback for excute when filter is open .
  * @returns HIT Table Toolbar control component.
  */
 const HitTableToolbar = ({ onUpdateRecords, addToDBFunc, onShowFilter }) => {

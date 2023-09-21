@@ -20,13 +20,11 @@ import TableSortLabel from '@mui/material/TableSortLabel';
  * @member {Array} headCells - An array of objects defining the table header cells.
  * @member {string} order - The current sorting order ('asc' or 'desc').
  * @member {string} orderBy - The currently sorted column ID.
- * @member {number} numSelected - The number of selected rows (used for multi-select tables).
- * @member {number} rowCount - The total number of rows in the table.
  * @member {function} onRequestSort - The callback function for sorting columns.
  * @returns HIT Table Header control component.
  */
 const HitTableHeader = (props) => {
-    const { headCells, order, orderBy, numSelected, rowCount, onRequestSort } = props;
+    const { headCells, order, orderBy, onRequestSort } = props;
 
     // Function to create a sort handler for a specific property
     const createSortHandler = (property) => (event) => {

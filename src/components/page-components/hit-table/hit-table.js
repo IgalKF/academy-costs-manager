@@ -117,8 +117,6 @@ const HitTable = ({ costTransactionRecords, onUpdateRecords, addToDBFunc, filter
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - costTransactionRecords?.length) : 0;
 
-  console.log('emptyRows', emptyRows);
-
   // Calculate the visible rows based on sorting and pagination
   const visibleRows = React.useMemo(
     () =>
@@ -147,11 +145,9 @@ const HitTable = ({ costTransactionRecords, onUpdateRecords, addToDBFunc, filter
           >
             <HitTableHeader
               headCells={headCells}
-              numSelected={selected.length}
               order={order}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
-              rowCount={costTransactionRecords?.length}
             />
             <HitTableBody
               isSelected={isSelected}
