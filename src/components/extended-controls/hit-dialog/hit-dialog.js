@@ -5,47 +5,42 @@ Itay Halaf      205585193
 Tamara Slouzky  318875846
 */
 
-import React from "react";
+import React, { useState } from "react";
 import Dialog from "@mui/material/Dialog";
-import DialogContent from "@mui/material/DialogContent";
-import { HitForm } from "../hit-form/hit-form";
 import DialogTitle from "@mui/material/DialogTitle";
-import "./hit-dialog.css";
+import DialogContent from "@mui/material/DialogContent";
+import HitForm from "./HitForm"; // Import your HitForm component
 
-/**
- * HIT Dialog control - Encapsulates MUI's complexity and providing dedicated flexiblity and custom reusability.
- * @param {Object} properties - Cpmponent's properties:
- * ** open -Dialog's state.
- * ** onClose -callback to execute on Dialog close.
- * ** onSubmit -callback to execute on submit button click.
- * ** valueState -state provided to form for ipdate on change.
- * @returns HIT Dialog control component.
- */
 const HitDialog = (props) => {
-  const { open, onClose, onSubmit, valueState } = props;
+  const { open, onClose, onSubmit } = props;
+  const [formData, setFormData] = useState({
+    category: "",
+    description: "",
+    sum: 0, // Initialize with a default value
+  });
+
   const formOptions = [
     {
       key: "category",
       type: "select",
       label: "Category",
       options: ["FOOD", "HEALTH", "EDUCATION", "TRAVEL", "HOUSING", "OTHER"],
-      required: true,
+      required: true, // Make the "Category" field required
     },
     {
       key: "description",
       type: "text",
       label: "Description",
-      required: true,
+      required: true, // Make the "Description" field required
     },
     {
       key: "sum",
       type: "number",
       label: "Sum",
-      required: true,
+      required: true, // Make the "Sum" field required
     },
   ];
 
-  
   const handleChange = (key, value) => {
     // Update the form data when a field changes
     setFormData({ ...formData, [key]: value });
@@ -64,16 +59,15 @@ const HitDialog = (props) => {
 
   return (
     <Dialog className="hit-dialog" open={open} onClose={onClose}>
-      <DialogTitle id="alert-dialog-title">
-        {"Add record"}
-      </DialogTitle>
+      <DialogTitle id="alert-dialog-title">{"Add record"}</DialogTitle>
       <DialogContent>
         <HitForm
           formColumns={1}
           closeButtonOptions={{ closeEventCallback: onClose }}
-          submitButtonOptions={{ submitEventCallback: onSubmit }}
+          submitButtonOptions={{ submitEventCallback: handleFormSubmit }}
           formControls={formOptions}
-          valueState={valueState}
+          formData={formData}
+          onFieldChange={handleChange}
         />
       </DialogContent>
     </Dialog>
