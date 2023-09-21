@@ -46,7 +46,7 @@ const HitTableHeader = ({ headCells, order, orderBy, onRequestSort }) => {
               >
                 {headCell.label}
                 {orderBy === headCell.id ? (
-                  <Box component="span" sx={visuallyHidden}>
+                  <Box component="span" >
                     {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
                   </Box>
                 ) : null}

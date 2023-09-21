@@ -132,8 +132,8 @@ const HitTable = ({ costTransactionRecords, onUpdateRecords, addToDBFunc, filter
   }, [filterState]);
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <Paper sx={{ width: "100%", mb: 2 }}>
+    <Box>
+      <Paper>
         <HitTableToolbar
           addToDBFunc={addToDBFunc}
           onUpdateRecords={onUpdateRecords}
@@ -144,7 +144,6 @@ const HitTable = ({ costTransactionRecords, onUpdateRecords, addToDBFunc, filter
         </TableContainer>
         <TableContainer>
           <Table
-            sx={{ minWidth: 750 }}
             size={"medium"}
           >
             <HitTableHeader
