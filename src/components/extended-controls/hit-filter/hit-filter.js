@@ -9,8 +9,8 @@ Tamara Slouzky  318875846
 import React from "react";
 import { InvalidPropertyException } from "../../../domain-model/exceptions/invalid-property-exception";
 import { HitForm } from "../hit-form/hit-form";
-import './hit-filter.css';
 import { categories } from "../../../common/categories";
+import './hit-filter.css';
 
 // Define the HitFilter component
 const HitFilter = ({ filterState, showFilter }) => {
@@ -41,12 +41,15 @@ const HitFilter = ({ filterState, showFilter }) => {
 
     const collapseClass = showFilter ? '' : ' collapsed';
 
-    return (<div className={'hit-filter' + collapseClass}>
-        <HitForm
-            valueState={filterState}
-            formControls={filterFormOptions}
-        />
-    </div>);
+    return (
+        <div className={'hit-filter' + collapseClass}>
+            <HitForm
+                showClearButton={true}
+                valueState={filterState}
+                formControls={filterFormOptions}
+            />
+        </div>
+    );
 };
 
 // Export the HitFilter component

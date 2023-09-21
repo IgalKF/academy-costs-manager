@@ -5,13 +5,10 @@ Itay Halaf      205585193
 Tamara Slouzky  318875846
 */
 
-// Import React and exception classes
 import React from "react";
 import { InvalidPropertyException } from "../../../domain-model/exceptions/invalid-property-exception";
 import { InvalidTypeException } from "../../../domain-model/exceptions/invalid-type-exception";
 import { RequiredPropertyException } from "../../../domain-model/exceptions/required-property-exception";
-
-// Import UI components
 import { HitTextInput } from "../../base-controls/hit-text-input/hit-text-input";
 import { HitSelect } from "../../base-controls/hit-select/hit-select";
 import { HitDatepicker } from "../../base-controls/hit-datepicker/hit-datepicker";
@@ -22,7 +19,15 @@ import './hit-form.css'
 import { FormGroup } from "@mui/material";
 
 // Define the HitForm component
-const HitForm = ({ formControls, valueState, closeButtonOptions, submitButtonOptions, formColumns }) => {
+const HitForm = (props) => {
+    // Set a long instance of properties.
+    const {
+        formControls,
+        valueState,
+        closeButtonOptions,
+        submitButtonOptions,
+        formColumns,
+        showClearButton } = props;
 
     // Validate that formControls is an array
     if (!Array.isArray(formControls)) {
@@ -123,6 +128,17 @@ const HitForm = ({ formControls, valueState, closeButtonOptions, submitButtonOpt
         }
     });
 
+    const [values, setValues] = valueState;
+
+    // Button that clears the current state of the form.
+    const clearButtonElement = showClearButton
+        ? (
+            <HitButton
+                clickEvent={() => setValues({toDate: new Date()})}
+                type='text'
+                title='Clear' />
+        )
+        : undefined;
 
     // Devide form to columns.
     const columnElements = [];
@@ -141,6 +157,7 @@ const HitForm = ({ formControls, valueState, closeButtonOptions, submitButtonOpt
         <FormGroup className='hit-form'>
             <div className='form-content'>
                 {formContentElements}
+                {clearButtonElement}
             </div>
             <div className='form-actions'>
                 {closeButtonElement}
