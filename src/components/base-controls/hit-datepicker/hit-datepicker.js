@@ -24,7 +24,7 @@ const HitDatepicker = ({ controlKey, label, valueState }) => {
 
   return <div className="hit-control hit-datepicker">
     <div className="inline-align-container">
-      <DatePicker format="DD/MM/YYYY" onChange={handleChange} label={label} />
+      <DatePicker format="DD/MM/YYYY" onChange={handleChange} value={value?.[controlKey]} label={label} />
     </div>
   </div>;
 };

@@ -17,9 +17,10 @@ const HitTextInput = ({ type, label, valueState, controlKey }) => {
     const handleChange = (event) => {
         setValue({ ...value, [controlKey]: event?.target?.value });
     };
+
     return (
         <FormControl className="hit-control hit-select">
-            <TextField type={fieldType} onBlur={handleChange} variant="outlined" label={label} className="select-input" />
+            <TextField type={fieldType} onChange={handleChange} variant="outlined" label={label} className="select-input" />
         </FormControl>
     );
 };

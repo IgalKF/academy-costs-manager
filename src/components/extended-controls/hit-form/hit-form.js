@@ -134,7 +134,7 @@ const HitForm = (props) => {
     const clearButtonElement = showClearButton
         ? (
             <HitButton
-                clickEvent={() => setValues({toDate: new Date()})}
+                clickEvent={() => setValues({})}
                 type='text'
                 title='Clear' />
         )
