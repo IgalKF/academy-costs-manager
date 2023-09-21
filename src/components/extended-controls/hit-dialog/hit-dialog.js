@@ -44,6 +44,24 @@ const HitDialog = (props) => {
       required: true,
     },
   ];
+
+  
+  const handleChange = (key, value) => {
+    // Update the form data when a field changes
+    setFormData({ ...formData, [key]: value });
+  };
+
+  const handleFormSubmit = () => {
+    // Check if the required fields have valid values
+    if (formData.category && formData.description && formData.sum) {
+      // Submit the form
+      onSubmit(formData);
+    } else {
+      // Display an error or message indicating that required fields are missing
+      console.log("Please fill in all required fields.");
+    }
+  };
+
   return (
     <Dialog className="hit-dialog" open={open} onClose={onClose}>
       <DialogTitle id="alert-dialog-title">
