@@ -86,6 +86,16 @@ const HitForm = ({ formControls, valueState, closeButtonOptions, submitButtonOpt
                         label={control.label}
                         initialValue={control.value}
                     />);
+            case 'number':
+                return (
+                    <HitTextInput
+                        type={control.type}
+                        valueState={valueState}
+                        controlKey={control.key}
+                        key={control.key}
+                        label={control.label}
+                        initialValue={control.value}
+                    />);
             case 'select':
                 return (
                     <HitSelect

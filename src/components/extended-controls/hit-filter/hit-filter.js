@@ -10,6 +10,7 @@ import React from "react";
 import { InvalidPropertyException } from "../../../domain-model/exceptions/invalid-property-exception";
 import { HitForm } from "../hit-form/hit-form";
 import './hit-filter.css';
+import { categories } from "../../../common/categories";
 
 // Define the HitFilter component
 const HitFilter = ({ filterState, showFilter }) => {
@@ -34,9 +35,7 @@ const HitFilter = ({ filterState, showFilter }) => {
             key: 'category',
             type: 'select',
             label: 'Category',
-            options: [
-                "FOOD", "HEALTH", "EDUCATION", "TRAVEL", "HOUSING", "OTHER"
-            ]
+            options: categories,
         }
     ];
 

@@ -23,8 +23,7 @@ import TableSortLabel from '@mui/material/TableSortLabel';
  * @member {function} onRequestSort - The callback function for sorting columns.
  * @returns HIT Table Header control component.
  */
-const HitTableHeader = (props) => {
-    const { headCells, order, orderBy, onRequestSort } = props;
+const HitTableHeader = ({ headCells, order, orderBy, onRequestSort }) => {
 
     // Function to create a sort handler for a specific property
     const createSortHandler = (property) => (event) => {

@@ -18,35 +18,34 @@ import { RequiredPropertyException } from "../../../domain-model/exceptions/requ
  * * isItemSelected - checks if the row should be displayed.
  * @returns HIT Table Row control component.
  */
-const HitTableRow = (props) => {
-    const {rowData,labelId,isItemSelected}=props;
+const HitTableRow = ({ rowData, labelId, isItemSelected }) => {
 
-    if (!rowData) {
-      // Property wasn't defined.
-      throw new RequiredPropertyException('HitTableRow', 'rowData');
-    }
-    
-    if ( typeof rowData !="object") {
-      // Property wasn't defined as intended.
-      throw new InvalidPropertyException('HitTableRow', 'rowData', 'Should be an object.');
-    }
-  
-    if (labelId && typeof labelId != 'string') {
-      // Property wasn't defined as intended.
-      throw new InvalidPropertyException('HitTableRow', 'labelId', 'Should be a string.');
-    }
+  if (!rowData) {
+    // Property wasn't defined.
+    throw new RequiredPropertyException('HitTableRow', 'rowData');
+  }
 
-    if (isItemSelected === undefined) {
-      // Property wasn't defined.
-      throw new RequiredPropertyException('HitTableRow', 'isItemSelected');
-    }
-    
-    if ( typeof isItemSelected !="boolean") {
-      // Property wasn't defined as intended.
-      throw new InvalidPropertyException('HitTableRow', 'isItemSelected', 'Should be boolean.');
-    }
-  
-    
+  if (typeof rowData != "object") {
+    // Property wasn't defined as intended.
+    throw new InvalidPropertyException('HitTableRow', 'rowData', 'Should be an object.');
+  }
+
+  if (labelId && typeof labelId != 'string') {
+    // Property wasn't defined as intended.
+    throw new InvalidPropertyException('HitTableRow', 'labelId', 'Should be a string.');
+  }
+
+  if (isItemSelected === undefined) {
+    // Property wasn't defined.
+    throw new RequiredPropertyException('HitTableRow', 'isItemSelected');
+  }
+
+  if (typeof isItemSelected != "boolean") {
+    // Property wasn't defined as intended.
+    throw new InvalidPropertyException('HitTableRow', 'isItemSelected', 'Should be boolean.');
+  }
+
+
   return <TableRow
     id={labelId}
     key={rowData.name}

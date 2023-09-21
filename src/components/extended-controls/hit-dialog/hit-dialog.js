@@ -8,8 +8,9 @@ Tamara Slouzky  318875846
 import React from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
-import { HitForm } from "../hit-form/hit-form";
 import DialogTitle from "@mui/material/DialogTitle";
+import { HitForm } from "../hit-form/hit-form";
+import { categories } from "../../../common/categories";
 import "./hit-dialog.css";
 
 /**
@@ -21,14 +22,13 @@ import "./hit-dialog.css";
  * ** valueState -state provided to form for ipdate on change.
  * @returns HIT Dialog control component.
  */
-const HitDialog = (props) => {
-  const { open, onClose, onSubmit, valueState } = props;
+const HitDialog = ({ open, onClose, onSubmit, valueState }) => {
   const formOptions = [
     {
       key: "category",
       type: "select",
       label: "Category",
-      options: ["FOOD", "HEALTH", "EDUCATION", "TRAVEL", "HOUSING", "OTHER"],
+      options: categories,
     },
     {
       key: "description",
@@ -37,10 +37,11 @@ const HitDialog = (props) => {
     },
     {
       key: "sum",
-      type: "text",
+      type: "number",
       label: "Sum",
     },
   ];
+
   return (
     <Dialog className="hit-dialog" open={open} onClose={onClose}>
       <DialogTitle id="alert-dialog-title">
