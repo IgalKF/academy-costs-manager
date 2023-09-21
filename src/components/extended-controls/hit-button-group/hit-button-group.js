@@ -23,10 +23,15 @@ const HitButtonGroup = ({ onAddRecord, onUpdateRecords, onShowFilter }) => {
   const [recoredToAdd, setRecordToAdd] = useState({});
 
   const onDialogSubmit = () => {
-    onAddRecord(recoredToAdd)
+    onAddRecord(recoredToAdd);
     setIsAddMode(false);
-
   }
+  
+  const handleClose = () =>{
+    setIsAddMode(false);
+    onUpdateRecords();
+  }
+
   return (
     <div className="hit-button-group">
       <HitButton
@@ -37,7 +42,7 @@ const HitButtonGroup = ({ onAddRecord, onUpdateRecords, onShowFilter }) => {
       <HitDialog
         valueState={[recoredToAdd, setRecordToAdd]}
         open={isAddMode}
-        onClose={() => setIsAddMode(false)}
+        onClose={handleClose}
         onSubmit={onDialogSubmit}
       ></HitDialog>
       <HitButton
