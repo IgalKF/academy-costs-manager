@@ -51,7 +51,6 @@ const HitTableRow = ({ rowData, labelId, isItemSelected }) => {
     key={rowData.name}
     selected={isItemSelected}
   >
-
     <TableCell >{rowData.date}</TableCell>
     <TableCell >{rowData.category}</TableCell>
     <TableCell >{rowData.description}</TableCell>
