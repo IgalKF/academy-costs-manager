@@ -5,14 +5,14 @@ Itay Halaf      205585193
 Tamara Slouzky  318875846
 */
 
-
 import React from "react";
-import { Button } from '@mui/material';
+import { Button } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import { HitIcon } from "../hit-icon/hit-icon";
 import { InvalidPropertyException } from "../../../domain-model/exceptions/invalid-property-exception";
 import { RequiredPropertyException } from "../../../domain-model/exceptions/required-property-exception";
+import "./hit-button.css";
 
 /**
  * HIT button control - Encapsulates MUI's complexity and providing dedicated flexiblity and custom reusability.
@@ -24,42 +24,71 @@ import { RequiredPropertyException } from "../../../domain-model/exceptions/requ
  * @returns HIT button control component.
  */
 const HitButton = ({ title, type, clickEvent, icon }) => {
+  const buttonProperties = ["hit-button"];
+  // Add consistent center property.
+  if (title === "Clear") {
+    buttonProperties.push("center");
+  }
 
-    if (title && typeof title != 'string') {
-        // Property wasn't defined as intended.
-        throw new InvalidPropertyException('HitButton', 'title', 'Should be a string.');
-    }
+  // Define as a readable class string.
+	const buttonClass = buttonProperties.join(' ');
 
-    if (type && typeof type != 'string') {
-        // Property wasn't defined as intended.
-        throw new InvalidPropertyException('HitButton', 'type', 'Should be a string.');
-    }
+  if (title && typeof title != "string") {
+    // Property wasn't defined as intended.
+    throw new InvalidPropertyException(
+      "HitButton",
+      "title",
+      "Should be a string."
+    );
+  }
 
-    if (!clickEvent) {
-        // Property wasn't defined.
-        throw new RequiredPropertyException('HitButton', 'clickEvent');
-    }
+  if (type && typeof type != "string") {
+    // Property wasn't defined as intended.
+    throw new InvalidPropertyException(
+      "HitButton",
+      "type",
+      "Should be a string."
+    );
+  }
 
-    if (typeof clickEvent != 'function') {
-        // Property wasn't defined as intended.
-        throw new InvalidPropertyException('HitButton', 'clickEvent', 'Should be a function.');
-    }
+  if (!clickEvent) {
+    // Property wasn't defined.
+    throw new RequiredPropertyException("HitButton", "clickEvent");
+  }
 
-    if (icon && typeof icon != 'string') {
-        // Property wasn't defined as intended.
-        throw new InvalidPropertyException('HitButton', 'icon', 'Should be a string.');
-    }
+  if (typeof clickEvent != "function") {
+    // Property wasn't defined as intended.
+    throw new InvalidPropertyException(
+      "HitButton",
+      "clickEvent",
+      "Should be a function."
+    );
+  }
 
+  if (icon && typeof icon != "string") {
+    // Property wasn't defined as intended.
+    throw new InvalidPropertyException(
+      "HitButton",
+      "icon",
+      "Should be a string."
+    );
+  }
 
-    const iconElement = icon ? <HitIcon>{icon}</HitIcon> : undefined;
+  const iconElement = icon ? <HitIcon>{icon}</HitIcon> : undefined;
 
-    return <div className='hit-button'>
-        {icon ? (<Tooltip title={title}>
-            <IconButton onClick={clickEvent}>
-                {iconElement}
-            </IconButton>
-        </Tooltip>) : (<Button onClick={clickEvent} variant={type}>{title}</Button>)}
-    </div>;
+  return (
+    <div className={buttonClass}>
+      {icon ? (
+        <Tooltip title={title}>
+          <IconButton onClick={clickEvent}>{iconElement}</IconButton>
+        </Tooltip>
+      ) : (
+        <Button onClick={clickEvent} variant={type}>
+          {title}
+        </Button>
+      )}
+    </div>
+  );
 };
 
 export { HitButton };
