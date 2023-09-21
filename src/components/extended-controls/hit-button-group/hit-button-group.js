@@ -9,12 +9,13 @@ import { HitButton } from "../../base-controls/hit-button/hit-button";
 import HitDialog from "../../extended-controls/hit-dialog/hit-dialog";
 import "./hit-button-group.css";
 import React, { useState } from "react";
+
 /**
  * HIT Button Group control - Encapsulates MUI's complexity and providing dedicated flexiblity and custom reusability.
  * @param {Object} properties - Cpmponent's properties:
- * ** onAddRecord -callback to execute on add button click.
- * ** onUpdateRecords -callback to execute on refresh button click.
- * ** onShowFilter -callback to execute on onShowFilter button click.
+ * * onAddRecord -callback to execute on add button click.
+ * * onUpdateRecords -callback to execute on refresh button click.
+ * * onShowFilter - Callback to execute on onShowFilter button click.
  * @returns HIT Button Group control component.
  */
 const HitButtonGroup = ({ onAddRecord, onUpdateRecords, onShowFilter }) => {

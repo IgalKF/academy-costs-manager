@@ -5,7 +5,6 @@ Itay Halaf      205585193
 Tamara Slouzky  318875846
 */
 
-// Import the Card component from Material-UI
 import { Card } from "@mui/material";
 import React from "react";
 
@@ -18,7 +17,6 @@ import React from "react";
 const HitCard = ({ children }) => {
     return (
         <div className='hit-card'>
-            {/* Render a Material-UI Card component and place the 'children' inside it */}
             <Card>{children}</Card>
         </div>
     );
