@@ -35,15 +35,6 @@ const App = () => {
   const [updateRecords, setUpdateRecords] = useState(true);
 
   const addToDB = (request) => {
-    const isValidSum = /^\d+(\.\d{0,1})?$/.test(request?.sum);
-
-    if (!isValidSum) {
-      // Handle the case where the 'sum' is not a valid number with at most one decimal point
-      // You can show an error message or perform any other action here
-      console.error("Invalid 'sum'. Please enter a valid number with at most one decimal point.");
-      return;
-    }
-
     idb.openCostsDB("costs", 1).then((db) => {
       if (!(db instanceof CostTransactionsService)) {
         // Throw an exception if the database type is invalid
