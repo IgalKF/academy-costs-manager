@@ -27,11 +27,6 @@ const theme = createTheme({
           margin: "normal",
         },
       },
-      MuiPaper: {
-        defaultProps: {
-          sx: { width: "100%", mb: 2 },
-        },
-      },
       Box: {
         defaultProps: {
           sx: {
