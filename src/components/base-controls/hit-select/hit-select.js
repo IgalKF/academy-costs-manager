@@ -59,7 +59,7 @@ const HitSelect = ({ controlKey, options, label, valueState, initialValue }) => 
       throw new InvalidPropertyException('HitSelect', 'options', 'Invalid object structure.');
     } else {
       // If it's just a string array.
-      return (<MenuItem key={option.value} value={option}>{option}</MenuItem>);
+      return (<MenuItem key={option} value={option}>{option}</MenuItem>);
     }
   });
 

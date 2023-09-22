@@ -150,7 +150,7 @@ const HitForm = (props) => {
         const columnControls = controlElements
             .filter((control, index) => index % formColumns === i);
 
-        columnElements.push(<div className='form-column'>{columnControls}</div>);
+        columnElements.push(<div key={i} className='form-column'>{columnControls}</div>);
     }
 
     const formContentElements = formColumns > 0 ? columnElements : controlElements;

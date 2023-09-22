@@ -58,7 +58,7 @@ const HitTableBody = ({ visibleRows, emptyRows, isSelected }) => {
 
         return (
           <HitTableRow
-            key={row.id}
+            key={labelId}
             rowData={row}
             labelId={labelId}
             isItemSelected={false}
