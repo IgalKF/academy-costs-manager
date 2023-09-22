@@ -7,6 +7,8 @@ Tamara Slouzky  318875846
 import React from "react";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import './hit-datepicker.css';
+import dayjs from "dayjs";
+import { TextField } from "@mui/material";
 
 /**
  * HIT date picker control - Encapsulates MUI's complexity and providing dedicated flexiblity and custom reusability.
@@ -27,7 +29,14 @@ const HitDatepicker = ({ controlKey, label, valueState, minDateByControl, maxDat
 
   return <div className="hit-control hit-datepicker">
     <div className="inline-align-container">
-      <DatePicker minDate={minDate} maxDate={maxDate} format="DD/MM/YYYY" onChange={handleChange} value={value?.[controlKey]} label={label} />
+      <DatePicker
+        minDate={minDate}
+        maxDate={maxDate}
+        format="DD/MM/YYYY"
+        onChange={handleChange}
+        value={value?.[controlKey] ? dayjs(value?.[controlKey]) : null} label={label}
+        renderInput={(params) => <TextField {...params} />}
+      />
     </div>
   </div>;
 };
