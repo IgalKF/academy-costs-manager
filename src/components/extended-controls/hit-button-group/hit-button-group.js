@@ -25,11 +25,11 @@ const HitButtonGroup = ({ onAddRecord, onUpdateRecords, onShowFilter }) => {
   const onDialogSubmit = () => {
     onAddRecord(recoredToAdd);
     setIsAddMode(false);
+    onUpdateRecords();
   }
   
   const handleClose = () =>{
     setIsAddMode(false);
-    onUpdateRecords();
   }
 
   return (
